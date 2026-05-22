@@ -5,12 +5,13 @@ interface Props {
   current: string;
   nextHref?: string;
   nextLabel?: string;
+  variant?: 'light' | 'dark';
 }
 
-const { prevHref, prevLabel, current, nextHref, nextLabel } = Astro.props;
+const { prevHref, prevLabel, current, nextHref, nextLabel, variant = 'light' } = Astro.props;
 ---
 
-<nav class="topnav">
+<nav class={`topnav ${variant}`}>
   <div class="breadcrumb">
     {prevHref && prevLabel && <a href={prevHref}>← {prevLabel}</a>}
     {prevHref && <span class="sep">/</span>}
@@ -23,22 +24,44 @@ const { prevHref, prevLabel, current, nextHref, nextLabel } = Astro.props;
 
 <style>
   .topnav {
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid;
     padding: 1rem clamp(1.25rem, 4vw, 3rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: var(--mono);
     font-size: 0.7rem;
-    color: var(--ink-soft);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(244, 234, 215, 0.92);
     backdrop-filter: blur(6px);
   }
+
+  /* Light variant */
+  .topnav.light {
+    border-color: var(--rule);
+    background: rgba(244, 234, 215, 0.92);
+    color: var(--ink-soft);
+  }
+  .topnav.light .breadcrumb a { color: var(--ink-soft); }
+  .topnav.light .breadcrumb a:hover { color: var(--ember); }
+  .topnav.light .breadcrumb .current { color: var(--ink-on-paper); }
+  .topnav.light .breadcrumb .sep { color: var(--ink-muted); }
+  .topnav.light .imprint { color: var(--ink-soft); }
+
+  /* Dark variant */
+  .topnav.dark {
+    border-color: var(--rule-on-dark);
+    background: rgba(20, 16, 12, 0.92);
+    color: var(--ink-on-dark-soft);
+  }
+  .topnav.dark .breadcrumb a { color: var(--ink-on-dark-soft); }
+  .topnav.dark .breadcrumb a:hover { color: var(--gold-soft); }
+  .topnav.dark .breadcrumb .current { color: var(--ink); }
+  .topnav.dark .breadcrumb .sep { color: var(--ink-on-dark-muted); }
+  .topnav.dark .imprint { color: var(--ink-on-dark-soft); }
 
   .breadcrumb {
     display: flex;
@@ -46,15 +69,7 @@ const { prevHref, prevLabel, current, nextHref, nextLabel } = Astro.props;
     gap: 0.75rem;
     flex-wrap: wrap;
   }
-
-  .breadcrumb a {
-    color: var(--ink-soft);
-    transition: color 0.2s ease;
-  }
-
-  .breadcrumb a:hover { color: var(--ember); }
-  .breadcrumb .current { color: var(--ink-on-paper); }
-  .breadcrumb .sep { color: var(--ink-muted); }
+  .breadcrumb a { transition: color 0.2s ease; }
 
   .imprint {
     font-family: var(--serif);
@@ -63,7 +78,6 @@ const { prevHref, prevLabel, current, nextHref, nextLabel } = Astro.props;
     font-size: 0.85rem;
     text-transform: none;
     letter-spacing: 0;
-    color: var(--ink-soft);
   }
 
   @media (max-width: 768px) {

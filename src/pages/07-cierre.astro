@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import QuoteFullscreen from '../components/QuoteFullscreen.astro';
+import ClosingCTA from '../components/ClosingCTA.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<Layout
+  title="¿Conspiración o desidia planificada?"
+  description="El cierre del ensayo de Julio Ibarra. Después de recorrer la historia productiva, fiscal y política del tabaco en Argentina, una sola pregunta: ¿estamos frente a una sucesión de fracasos o ante una desidia planificada funcional a intereses concretos?"
+  mode="dark"
+>
+  <TopNav
+    prevHref="/"
+    prevLabel="Volver al inicio"
+    current="07 ¿Conspiración o desidia planificada?"
+    variant="dark"
+  />
+
+  <header class="cierre-header reveal">
+    <div class="kicker">Sección 07 · El manifiesto</div>
+    <h1 class="cierre-title">¿Conspiración<br><em>o desidia planificada?</em></h1>
+    <p class="cierre-lead">
+      Cuando el humo se disipa —el del cigarrillo, el del vapeador o el del discurso— lo que queda es una estructura de poder.
+    </p>
+  </header>
+
+  <article class="manifesto">
+    <div class="block reveal">
+      <div class="block-mark">I</div>
+      <p>
+        Hay un punto en la historia del tabaco argentino donde la acumulación de hechos deja de poder explicarse como errores aislados. La crisis recurrente del productor primario, la dependencia estructural del FET, la concentración del poder de mercado y la adaptación normativa favorable a la industria, repetidas durante décadas, exigen una pregunta incómoda: ¿estamos frente a una sucesión de fracasos o ante una <em>desidia planificada funcional a intereses concretos</em>?
+      </p>
+    </div>
+
+    <div class="block reveal">
+      <div class="block-mark">II</div>
+      <p>
+        La industria tabacalera supo convivir con regulaciones sanitarias estrictas, campañas antitabaco, aumentos impositivos y cambios culturales. No desapareció: redefinió su discurso, diversificó sus productos y desplazó el eje del debate. Allí donde antes se discutía combustión, hoy se discute tecnología. Donde antes se hablaba de cigarrillos, hoy se habla de <em>"alternativas"</em>. Donde antes el conflicto era sanitario, hoy se presenta como regulatorio.
+      </p>
+    </div>
+
+    <div class="block reveal">
+      <div class="block-mark">III</div>
+      <p>
+        Y mientras todo esto sucede, la situación del productor primario ocupa un lugar cada vez más marginal. <strong>No por casualidad.</strong> La estrategia global de PMI implica menos volumen de hoja, menos calidad agrícola diferenciada, menos productores necesarios. El valor migró a la patente, el dispositivo, la marca y la regulación. Un primer eslabón debilitado, fragmentado y dependiente reduce su capacidad de presión política y facilita transiciones sin resistencia organizada.
+      </p>
+    </div>
+
+    <div class="block reveal manifesto-final">
+      <div class="block-mark">IV</div>
+      <p>
+        Este libro no propone respuestas cerradas. Propone <em>hacerse las preguntas correctas</em>. Cuando el humo se disipa —el del cigarrillo, el del vapeador o el del discurso— lo que queda es una estructura de poder. Entenderla es el primer paso para decidir si se la acepta como inevitable o si, finalmente, se la discute.
+      </p>
+    </div>
+  </article>
+
+  <QuoteFullscreen>
+    El productor sobrevive, pero <em>no se fortalece</em>.
+    El Estado interviene, pero <em>no redefine</em>.
+    La industria cambia, pero <em>siempre llega primero</em>.
+  </QuoteFullscreen>
+
+  <ClosingCTA />
+
+  <ScrollReveal />
+</Layout>
+
+<style>
+  /* CIERRE HEADER */
+  .cierre-header {
+    text-align: center;
+    padding: 8rem clamp(1.5rem, 5vw, 3rem) 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .cierre-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(200, 57, 46, 0.06), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 80%, rgba(212, 167, 71, 0.04), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cierre-header > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cierre-header .kicker {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ember);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cierre-header .kicker::before,
+  .cierre-header .kicker::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--ember);
+    opacity: 0.5;
+  }
+
+  .cierre-title {
+    font-family: var(--serif);
+    font-variation-settings: "SOFT" 0, "opsz" 144;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0 0 2.5rem 0;
+  }
+
+  .cierre-title :global(em) {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold-soft);
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+
+  .cierre-lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+    color: var(--ink-on-dark-soft);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* MANIFESTO BLOCKS */
+  .manifesto {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem clamp(1.5rem, 5vw, 3rem) 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .block-mark {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--gold-soft);
+    text-align: right;
+    padding-top: 0.35rem;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+  }
+
+  .block p {
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--ink);
+    max-width: 60ch;
+  }
+
+  .block p :global(em) {
+    color: var(--gold-soft);
+    font-style: italic;
+  }
+
+  .block p :global(strong) {
+    color: var(--ember);
+    font-weight: 500;
+  }
+
+  .manifesto-final p {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.35rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .manifesto-final .block-mark {
+    color: var(--ember);
+  }
+
+  @media (max-width: 768px) {
+    .block {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .block-mark {
+      text-align: left;
+      font-size: 2.25rem;
+    }
+    .manifesto { gap: 3.5rem; padding-bottom: 4rem; }
+    .manifesto-final p { font-size: 1.2rem; }
+  }
+</style>

@@ -1,0 +1,178 @@
+---
+// Tres acciones al final del cierre: compartir, descargar, contacto.
+---
+
+<section class="cta-section reveal">
+  <div class="cta-kicker">Y ahora</div>
+  <h3 class="cta-title">Tres formas de seguir.</h3>
+
+  <div class="cta-grid">
+    <a href="#" class="cta-card" data-action="share">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/>
+          <circle cx="6" cy="12" r="3"/>
+          <circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+      </div>
+      <h4>Compartir</h4>
+      <p>Copiá el link de este sitio o mandalo a alguien para quien estas preguntas importen.</p>
+      <span class="cta-arrow">Copiar enlace →</span>
+    </a>
+
+    <a href="#" class="cta-card" data-action="download">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </div>
+      <h4>Descargar el ensayo</h4>
+      <p>El libro completo en PDF, con todas las citas, notas al pie y bibliografía.</p>
+      <span class="cta-arrow">Descargar (.pdf) →</span>
+    </a>
+
+    <a href="#" class="cta-card" data-action="contact">
+      <div class="cta-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        </svg>
+      </div>
+      <h4>Contactar al autor</h4>
+      <p>Para entrevistas, presentaciones, debates o referencias académicas y periodísticas.</p>
+      <span class="cta-arrow">Escribir →</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 6rem clamp(1.5rem, 5vw, 4rem);
+    background: var(--bg-warm);
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .cta-kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ember);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 0 4rem 0;
+  }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .cta-card {
+    padding: 2.5rem 2rem;
+    background: rgba(244, 234, 215, 0.04);
+    border: 1px solid var(--rule-on-dark);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .cta-card:hover {
+    border-color: var(--gold-soft);
+    background: rgba(212, 167, 71, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .cta-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--gold-soft);
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .cta-icon svg { width: 100%; height: 100%; }
+
+  .cta-card:hover .cta-icon {
+    color: var(--ember);
+  }
+
+  .cta-card h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0 0 0.85rem 0;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .cta-card p {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-on-dark-soft);
+    margin: 0 0 2rem 0;
+    flex: 1;
+  }
+
+  .cta-arrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .cta-card:hover .cta-arrow {
+    color: var(--ember);
+  }
+</style>
+
+<script>
+  // Mini-interacción: copiar URL al hacer click en "Compartir"
+  document.addEventListener('DOMContentLoaded', () => {
+    const shareBtn = document.querySelector('[data-action="share"]');
+    if (!shareBtn) return;
+
+    shareBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = window.location.origin + '/';
+      if (navigator.share) {
+        navigator.share({
+          title: 'Del Pucho al Cigarrillo Electrónico',
+          text: 'Un ensayo sobre tabaco, leyes y poder en Argentina, por Julio Ibarra.',
+          url: url,
+        }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          const arrow = shareBtn.querySelector('.cta-arrow');
+          if (arrow) {
+            const orig = arrow.textContent;
+            arrow.textContent = '✓ Enlace copiado';
+            setTimeout(() => { arrow.textContent = orig; }, 2000);
+          }
+        });
+      }
+    });
+  });
+</script>
