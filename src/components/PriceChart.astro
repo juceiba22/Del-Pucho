@@ -1,0 +1,198 @@
+---
+import data from '../data/precios-comparativos.json';
+---
+
+<div class="chart-wrap reveal">
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <h4 class="chart-card-title">Precio de acopio Virginia · Argentina vs. Brasil</h4>
+      <span class="chart-card-meta">USD / kg · 2016-2023</span>
+    </div>
+    <div class="chart-canvas-container">
+      <canvas id="priceChart" aria-label="Gráfico comparativo de precios de acopio del tabaco Virginia entre Argentina, Argentina+FET y Brasil"></canvas>
+    </div>
+    <p class="chart-footnote">
+      Datos ilustrativos para validación visual; en la implementación final se reemplazarán por los valores precisos del estudio comparativo. La conclusión cualitativa, sin embargo, es la que sostiene el libro: el "Argentina + FET" se acerca al precio brasileño, mientras el "Argentina solo" queda persistentemente por debajo.
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ chartData: data }}>
+  // Carga Chart.js desde CDN solo cuando hace falta
+  function loadChartJS() {
+    return new Promise((resolve, reject) => {
+      if (window.Chart) return resolve(window.Chart);
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+      s.onload = () => resolve(window.Chart);
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function initChart() {
+    const canvas = document.getElementById('priceChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    const config = {
+      type: 'bar',
+      data: {
+        labels: chartData.años,
+        datasets: [
+          {
+            label: 'Brasil (sin FET)',
+            data: chartData.series.brasil,
+            backgroundColor: '#2a1f15',
+            borderRadius: 2,
+            barPercentage: 0.85,
+            categoryPercentage: 0.7,
+          },
+          {
+            label: 'Argentina + FET',
+            data: chartData.series.argentina_con_fet,
+            backgroundColor: '#b89031',
+            borderRadius: 2,
+            barPercentage: 0.85,
+            categoryPercentage: 0.7,
+          },
+          {
+            label: 'Argentina (precio de acopio solo)',
+            data: chartData.series.argentina_sola,
+            backgroundColor: '#c8392e',
+            borderRadius: 2,
+            barPercentage: 0.85,
+            categoryPercentage: 0.7,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1100, easing: 'easeOutQuart' },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              font: { family: 'Inter', size: 12, weight: '500' },
+              color: '#2a1f15',
+              padding: 16,
+              boxWidth: 14,
+              boxHeight: 14,
+            },
+          },
+          tooltip: {
+            backgroundColor: '#2a1f15',
+            titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+            bodyFont: { family: 'Inter', size: 13 },
+            padding: 12,
+            cornerRadius: 4,
+            displayColors: true,
+            callbacks: {
+              label: (ctx) => ` ${ctx.dataset.label}: USD ${ctx.parsed.y.toFixed(2)} / kg`,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#6b5d4d' },
+            border: { color: '#d8cdb8' },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(216, 205, 184, 0.5)' },
+            ticks: {
+              font: { family: 'JetBrains Mono', size: 11 },
+              color: '#6b5d4d',
+              callback: (v) => 'USD ' + v.toFixed(2),
+            },
+            border: { display: false },
+          },
+        },
+      },
+    };
+
+    new window.Chart(ctx, config);
+  }
+
+  // Iniciar solo cuando el gráfico esté en pantalla (mejora perf)
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('.chart-wrap');
+    if (!wrap) return;
+    if (!('IntersectionObserver' in window)) {
+      loadChartJS().then(initChart);
+      return;
+    }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          loadChartJS().then(initChart);
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(wrap);
+  });
+</script>
+
+<style>
+  .chart-wrap {
+    max-width: var(--max-section);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .chart-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .chart-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .chart-card-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .chart-card-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .chart-canvas-container {
+    position: relative;
+    height: 420px;
+  }
+
+  .chart-footnote {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .chart-canvas-container { height: 320px; }
+  }
+</style>

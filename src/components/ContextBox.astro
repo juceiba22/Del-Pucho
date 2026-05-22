@@ -1,0 +1,44 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+}
+const { kicker, title } = Astro.props;
+---
+
+<aside class="context-box reveal">
+  <div class="ctx-kicker">{kicker}</div>
+  <h4>{title}</h4>
+  <slot />
+</aside>
+
+<style>
+  .context-box {
+    max-width: 720px;
+    margin: 4rem auto;
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+    background: var(--paper-soft);
+    border-left: 3px solid var(--gold);
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--ink-on-paper);
+  }
+
+  .ctx-kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h4 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+  }
+</style>

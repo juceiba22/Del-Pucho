@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La máquina del FET · Del Pucho al Cigarrillo Electrónico</title>
+<meta name="description" content="El Fondo Especial del Tabaco fue creado en 1972 para sostener al productor. Cincuenta años después, sigue intacto en su forma e invertido en su función.">
+
+<meta property="og:title" content="La máquina del FET · Del Pucho al Cigarrillo Electrónico">
+<meta property="og:description" content="Un instrumento creado en 1972 para sostener al productor primario que cincuenta años después funciona invertido en su función.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_AR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c8392e'/%3E%3Ctext x='32' y='42' font-family='Georgia' font-size='32' fill='%23f4ead7' text-anchor='middle' font-style='italic'%3EP%3C/text%3E%3C/svg%3E">
+
+<style>
+/* === SISTEMA DE DISEÑO === */
+:root {
+  --paper: #f4ead7;
+  --paper-soft: #faf6ec;
+  --paper-deep: #ebe0c8;
+  --ink-on-paper: #2a1f15;
+  --ink-soft: #6b5d4d;
+  --ink-muted: #9c8e7c;
+  --rule: #d8cdb8;
+  --rule-strong: #b8ac95;
+  --ember: #c8392e;
+  --ember-soft: #e3735f;
+  --gold: #b89031;
+  --gold-soft: #d4a747;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --max-prose: 680px;
+  --max-section: 1080px;
+  --max-wide: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--paper);
+  color: var(--ink-on-paper);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+body::after {
+  content: ''; position: fixed; inset: 0;
+  pointer-events: none; z-index: 100; opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* === REVEAL ON SCROLL === */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* === TIPOGRAFÍA === */
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ember);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.section-h2 {
+  font-family: var(--serif);
+  font-variation-settings: "SOFT" 0, "opsz" 144;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.75rem 0;
+}
+.section-h2 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ember);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+.section-h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem 0;
+  max-width: 720px;
+}
+.lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* === LAYOUT === */
+.prose {
+  max-width: var(--max-prose);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2rem);
+}
+.prose p {
+  font-family: var(--sans);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+  color: var(--ink-on-paper);
+}
+.prose p.lead-paragraph::first-letter {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  float: left;
+  margin: 0.45rem 0.65rem -0.2rem 0;
+  color: var(--ember);
+}
+.prose strong { font-weight: 600; }
+.prose em { color: var(--ink-soft); font-style: italic; }
+
+.spacer-md { height: 5rem; }
+
+/* === GLOSARIO === */
+.glossary {
+  border-bottom: 1px dotted var(--gold);
+  cursor: help;
+  padding-bottom: 1px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+.glossary:hover { color: var(--gold); }
+.glossary[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--ink-on-paper);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  border-radius: 4px;
+  white-space: normal;
+  width: max-content;
+  max-width: 280px;
+  z-index: 10;
+  pointer-events: none;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* === TOP NAV === */
+.topnav {
+  border-bottom: 1px solid var(--rule);
+  padding: 1rem clamp(1.25rem, 4vw, 3rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 234, 215, 0.92);
+  backdrop-filter: blur(6px);
+}
+.topnav .breadcrumb { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.topnav .breadcrumb a { color: var(--ink-soft); transition: color 0.2s ease; }
+.topnav .breadcrumb a:hover { color: var(--ember); }
+.topnav .breadcrumb .current { color: var(--ink-on-paper); }
+.topnav .breadcrumb .sep { color: var(--ink-muted); }
+.topnav .imprint {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+@media (max-width: 768px) {
+  .topnav .breadcrumb { font-size: 0.6rem; gap: 0.4rem; }
+  .topnav .imprint { display: none; }
+}
+
+/* === SECTION HEADER === */
+.section-header {
+  text-align: center;
+  padding: 6rem clamp(1.5rem, 5vw, 3rem) 4rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.section-header .kicker.decorated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.section-header .kicker.decorated::before,
+.section-header .kicker.decorated::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--ember);
+  opacity: 0.5;
+}
+.section-header .lead { max-width: 640px; margin: 0 auto; }
+
+.subsection-header {
+  max-width: var(--max-section);
+  margin: 7rem auto 3rem;
+  padding: 4rem clamp(1.5rem, 5vw, 3rem) 0;
+  border-top: 1px solid var(--rule);
+}
+.subsection-header .kicker { color: var(--gold); margin-bottom: 1rem; display: block; }
+.subsection-header .sub-lead {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0;
+}
+
+/* === PULL QUOTE === */
+.pullquote {
+  max-width: 1080px;
+  margin: 5rem auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+  position: relative;
+}
+.pullquote::before {
+  content: '"';
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(7rem, 12vw, 11rem);
+  color: var(--ember);
+  opacity: 0.22;
+  line-height: 1;
+  display: block;
+  margin-bottom: -3rem;
+}
+.pullquote q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  line-height: 1.4;
+  color: var(--ink-on-paper);
+  letter-spacing: -0.005em;
+  quotes: none;
+}
+.pullquote q::before, .pullquote q::after { content: ''; }
+.pullquote .cite {
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* === CONTEXT BOX === */
+.context-box {
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--paper-soft);
+  border-left: 3px solid var(--gold);
+  font-family: var(--sans);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-on-paper);
+}
+.context-box .ctx-kicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.context-box h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+.ctx-stat {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.ctx-stat strong { color: var(--ember); font-weight: 600; }
+
+/* === DIAGRAM === */
+.diagram-wrap {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+.diagram-frame {
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2.5rem clamp(1rem, 3vw, 2rem);
+  position: relative;
+}
+.diagram-frame svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+.node { cursor: help; }
+.node rect {
+  fill: var(--paper);
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+}
+.node:hover rect {
+  fill: var(--paper-deep);
+  stroke: var(--ember);
+  stroke-width: 2;
+}
+.node.critical rect {
+  fill: #f9e8de;
+  stroke: var(--ember);
+  stroke-width: 1.5;
+}
+.node.critical:hover rect { fill: #f5d6c4; }
+.node-title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  fill: var(--ink-on-paper);
+  text-anchor: middle;
+  pointer-events: none;
+}
+.node-subtitle {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 10px;
+  fill: var(--ink-soft);
+  text-anchor: middle;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+.flow-line { stroke: var(--rule-strong); stroke-width: 1.8; fill: none; }
+.flow-line.critical { stroke: var(--ember); stroke-width: 2.5; }
+.flow-line.draw {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+.arrow { opacity: 0; transition: opacity 0.4s ease; }
+.diagram-wrap.animated .flow-line.draw { animation: draw-line 1.2s ease-out forwards; }
+.diagram-wrap.animated .arrow { opacity: 1; transition-delay: 1s; }
+@keyframes draw-line { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .flow-line.draw { stroke-dashoffset: 0; }
+  .arrow { opacity: 1; }
+}
+.flow-label {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  fill: var(--ink-on-paper);
+  text-anchor: middle;
+}
+.flow-label.percent {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  fill: var(--ember);
+}
+.flow-label.percent.muted { fill: var(--gold); }
+.footnote-text {
+  font-family: var(--sans);
+  font-size: 11px;
+  fill: var(--ink-soft);
+  font-style: italic;
+}
+.diagram-legend {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.diagram-legend span { display: flex; align-items: center; gap: 0.5rem; }
+.diagram-legend .swatch { width: 16px; height: 3px; background: var(--rule-strong); }
+.diagram-legend .swatch.critical { background: var(--ember); }
+.diagram-legend .hint { color: var(--gold); }
+.fet-tooltip {
+  position: fixed;
+  background: var(--ink-on-paper);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  border-radius: 4px;
+  max-width: 280px;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.fet-tooltip.visible { opacity: 1; }
+@media (max-width: 640px) {
+  .diagram-legend { font-size: 0.6rem; gap: 1rem; }
+}
+
+/* === CHART === */
+.chart-wrap {
+  max-width: var(--max-section);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+.chart-card {
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+}
+.chart-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.chart-card-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0;
+  line-height: 1.3;
+}
+.chart-card-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.chart-canvas-container { position: relative; height: 420px; }
+.chart-footnote {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  font-style: italic;
+}
+@media (max-width: 768px) { .chart-canvas-container { height: 320px; } }
+
+/* === SPLIT 40/60 === */
+.split-wrap {
+  max-width: var(--max-section);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+.split-card {
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 2.5rem clamp(1.25rem, 3vw, 3rem);
+}
+.split-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+.split-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+.split-bar {
+  display: flex;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--rule-strong);
+}
+.split-bar .part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.5rem;
+  transition: filter 0.25s ease, flex 1.2s ease-out;
+}
+.split-bar .part:hover { filter: brightness(0.95); }
+.split-bar .part.offer { flex: 50; background: var(--gold-soft); color: var(--ink-on-paper); }
+.split-bar .part.demand { flex: 50; background: var(--ember); color: #fff; }
+.split-wrap.is-visible .split-bar .part.offer { flex: 40; }
+.split-wrap.is-visible .split-bar .part.demand { flex: 60; }
+.split-percent {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.split-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+  opacity: 0.85;
+}
+.split-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.split-foot p {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.split-foot p strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-on-paper);
+  margin-bottom: 0.5rem;
+}
+.split-conclusion {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.15rem;
+  color: var(--ink-on-paper);
+  line-height: 1.5;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .split-foot { grid-template-columns: 1fr; }
+  .split-bar .part { padding: 0 1rem; }
+  .split-percent { font-size: 1.7rem; }
+  .split-tag { font-size: 0.6rem; }
+}
+
+/* === NEXT TEASE === */
+.next-tease {
+  background: var(--ink-on-paper);
+  color: var(--paper);
+  margin-top: 8rem;
+  text-align: center;
+}
+.next-tease a {
+  display: block;
+  padding: 5rem clamp(1.5rem, 5vw, 3rem);
+  transition: background 0.3s ease;
+}
+.next-tease a:hover { background: #1f1610; }
+.nt-kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 1.25rem;
+}
+.nt-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.nt-title em {
+  font-style: italic;
+  color: var(--gold-soft);
+  font-weight: 300;
+}
+.nt-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(244, 234, 215, 0.7);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+.nt-cta {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--gold-soft);
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+.next-tease a:hover .nt-cta {
+  background: var(--gold-soft);
+  color: var(--ink-on-paper);
+}
+
+/* === RIBBON === */
+.dev-ribbon {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: var(--ember);
+  color: #fff;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  z-index: 200;
+  box-shadow: 0 4px 20px rgba(200, 57, 46, 0.3);
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="breadcrumb">
+    <a href="#">← 03 La crisis silenciosa</a>
+    <span class="sep">/</span>
+    <span class="current">04 La máquina del FET</span>
+    <span class="sep">/</span>
+    <a href="#">05 El director de orquesta →</a>
+  </div>
+  <span class="imprint">Del Pucho al Cigarrillo Electrónico</span>
+</nav>
+
+<header class="section-header reveal">
+  <div class="kicker decorated">Sección 04 · El corazón del argumento</div>
+  <h2 class="section-h2">La máquina <em>del FET</em></h2>
+  <p class="lead">Un instrumento creado en 1972 para sostener al productor primario que, cincuenta años después, sigue intacto en su forma e invertido en su función.</p>
+</header>
+
+<article class="prose reveal">
+  <p class="lead-paragraph">
+    El Fondo Especial del Tabaco fue creado por la <strong>Ley 19.800</strong> en 1972 con un objetivo declarado: financiar la reconversión del sector hacia las variedades claras —Virginia y Burley— sin que el productor quebrara en el camino. Cincuenta años después, la herramienta sobrevive intacta en su forma, pero invertida en su función.
+  </p>
+  <p>
+    El esquema operativo es claro: un <strong>7%</strong> de las ventas declaradas por la industria se recauda como FET, se gira a las provincias y se distribuye. Un 35% va directo al productor como <em>"precio FET"</em>. El otro 65% va a las <span class="glossary" data-tooltip="Cámaras y cooperativas provinciales que administran el 65% del FET. Ej: CTJ (Jujuy), COPROTAB (Salta), CTM (Misiones).">Unidades Ejecutoras</span> —cámaras y cooperativas— que en teoría financian obras, insumos y desarrollo productivo. En la práctica, ese 65% es administrado por dirigencias que son <strong>simultáneamente autoridades cooperativas y funcionarios provinciales</strong>, transfiriéndose recursos a sí mismas con la prolijidad burocrática de un <span class="glossary" data-tooltip="Plan Operativo Anual. Documento que las Unidades Ejecutoras presentan para acceder a fondos del FET.">POA</span> aprobado en cadena.
+  </p>
+  <p>
+    La consecuencia económica es ineludible. Cuando se compara el precio de acopio argentino con el brasileño, Argentina paga la mitad. Cuando se le suma el FET, los precios se equiparan. <strong>El FET no es un complemento al productor: es el subsidio implícito que permite al acopio pagar por debajo del precio internacional.</strong> Brasil no tiene FET y su productor cobra el doble. Acá, una recaudación parafiscal de USD 175-200 millones anuales termina financiando el margen de las multinacionales que dicen no recibir un peso del Estado.
+  </p>
+</article>
+
+<div class="pullquote reveal">
+  <q>El productor trabaja. El Estado compensa. La industria captura el beneficio estructural.</q>
+</div>
+
+<div class="subsection-header reveal">
+  <span class="kicker">Diagrama interactivo</span>
+  <h3 class="section-h3">El recorrido del dinero</h3>
+  <p class="sub-lead">De la venta del paquete al productor, pasando por seis nodos y casi un año de demora. Pasá el cursor sobre cada caja para ver el detalle.</p>
+</div>
+
+<div class="diagram-wrap reveal">
+  <div class="diagram-frame">
+    <svg viewBox="0 0 1000 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fet-diagram-title">
+      <title id="fet-diagram-title">Flujo del dinero del Fondo Especial del Tabaco</title>
+
+      <g class="flow-lines">
+        <path class="flow-line draw" d="M 500 100 L 500 170"/>
+        <polygon class="arrow" points="495,170 505,170 500,180" fill="#b8ac95"/>
+        <text class="flow-label" x="540" y="140">7% sobre ventas</text>
+
+        <path class="flow-line draw" d="M 500 250 L 500 320"/>
+        <polygon class="arrow" points="495,320 505,320 500,330" fill="#b8ac95"/>
+        <text class="flow-label" x="558" y="290">100% transferido</text>
+
+        <path class="flow-line draw" d="M 500 400 L 500 450"/>
+
+        <path class="flow-line draw" d="M 500 450 Q 500 490 360 490 Q 200 490 200 540"/>
+        <polygon class="arrow" points="195,540 205,540 200,550" fill="#b8ac95"/>
+        <text class="flow-label percent muted" x="320" y="475">35%</text>
+
+        <path class="flow-line critical draw" d="M 500 450 Q 500 490 640 490 Q 800 490 800 540"/>
+        <polygon class="arrow" points="795,540 805,540 800,550" fill="#c8392e"/>
+        <text class="flow-label percent" x="680" y="475">65%</text>
+
+        <path class="flow-line critical draw" d="M 800 620 L 800 680"/>
+        <polygon class="arrow" points="795,680 805,680 800,690" fill="#c8392e"/>
+        <text class="flow-label" x="930" y="655" text-anchor="end">vía POAs</text>
+      </g>
+
+      <g class="node" data-tooltip="Massalin, BAT, Sarandí, Bronway. Declaran ventas; sobre ese valor se calcula el 7% que alimenta el FET.">
+        <rect x="380" y="30" width="240" height="70" rx="3"/>
+        <text class="node-title" x="500" y="60">INDUSTRIA</text>
+        <text class="node-subtitle" x="500" y="80">Declara ventas de cigarrillos</text>
+      </g>
+
+      <g class="node" data-tooltip="Oficina nacional dentro de la Secretaría de Agricultura, Ganadería y Pesca. Recauda y gira el FET a las provincias.">
+        <rect x="350" y="180" width="300" height="70" rx="3"/>
+        <text class="node-title" x="500" y="210">COORDINACIÓN DEL TABACO</text>
+        <text class="node-subtitle" x="500" y="230">Sec. Agricultura, Ganadería y Pesca</text>
+      </g>
+
+      <g class="node" data-tooltip="Salta, Jujuy, Tucumán, Catamarca, Misiones, Corrientes, Chaco. Reciben el 100% del FET y lo distribuyen.">
+        <rect x="350" y="330" width="300" height="70" rx="3"/>
+        <text class="node-title" x="500" y="360">GOBIERNOS PROVINCIALES</text>
+        <text class="node-subtitle" x="500" y="380">7 jurisdicciones tabacaleras</text>
+      </g>
+
+      <g class="node" data-tooltip="Entre 16.000 y 19.000 productores. Reciben el precio FET en 2 cuotas, hasta 3 meses después, en moneda licuada por inflación.">
+        <rect x="60" y="540" width="280" height="80" rx="3"/>
+        <text class="node-title" x="200" y="572">PRODUCTOR PRIMARIO</text>
+        <text class="node-subtitle" x="200" y="590">"Precio FET" complementario</text>
+        <text class="node-subtitle" x="200" y="606">~18.000 productores</text>
+      </g>
+
+      <g class="node critical" data-tooltip="Cámaras y Cooperativas. Las autoridades son frecuentemente también funcionarios provinciales. Manejan el 65% del FET vía POAs aprobados en cadena.">
+        <rect x="660" y="540" width="280" height="80" rx="3"/>
+        <text class="node-title" x="800" y="572">UNIDADES EJECUTORAS</text>
+        <text class="node-subtitle" x="800" y="590">Cámaras y Cooperativas</text>
+        <text class="node-subtitle" x="800" y="606">CTJ · COPROTAB · CTM</text>
+      </g>
+
+      <g class="node" data-tooltip="Fertilizantes, sistemas de riego, semillas. Lo que en teoría debería llegar al productor vía Unidades Ejecutoras.">
+        <rect x="660" y="690" width="280" height="70" rx="3"/>
+        <text class="node-title" x="800" y="720">INSUMOS / INFRAESTRUCTURA</text>
+        <text class="node-subtitle" x="800" y="740">Fertilizantes, riego, semillas</text>
+      </g>
+
+      <text class="footnote-text" x="60" y="650">⚠ Pagos en 2 cuotas, hasta 3 meses después,</text>
+      <text class="footnote-text" x="60" y="666">licuados por inflación.</text>
+
+      <text class="footnote-text" x="660" y="650">⚠ Autoridades cooperativas y funcionarios</text>
+      <text class="footnote-text" x="660" y="666">provinciales suelen ser las mismas personas.</text>
+    </svg>
+
+    <div class="diagram-legend">
+      <span><span class="swatch"></span>Flujo institucional</span>
+      <span><span class="swatch critical"></span>Flujo críticamente concentrado</span>
+      <span class="hint">↟ Pasá el cursor sobre cada caja</span>
+    </div>
+  </div>
+</div>
+
+<div class="spacer-md"></div>
+
+<article class="prose reveal">
+  <p>
+    En 1995, en pleno auge del neoliberalismo, los países miembros de la OMC firmaron el Acuerdo sobre la Agricultura. Entre otras cosas, estableció un tope de <strong>USD 75 millones anuales</strong> para subsidios directos a unidades productivas. Como el FET recauda entre 175 y 200 millones, el excedente debe canalizarse por otros mecanismos. Argentina creó el <span class="glossary" data-tooltip="Programa de Reconversión de Áreas Tabacaleras. Canaliza fondos del FET vía las Unidades Ejecutoras.">PRAT</span> y lo hizo pasar por las Unidades Ejecutoras. Resultado:
+  </p>
+</article>
+
+<aside class="context-box reveal">
+  <div class="ctx-kicker">Cómo se reparte la torta</div>
+  <h4>USD 75 millones para 18.000 productores. USD 100 millones para 15 entidades.</h4>
+  <p>
+    El precio FET llega al productor en moneda licuada y dos cuotas. El financiamiento de las Unidades Ejecutoras llega en bloque, lo administran cámaras y cooperativas y termina en POAs aprobados en cadena vertical: cooperativa → provincia → coordinación → secretaría → vuelta a la cooperativa.
+  </p>
+  <div class="ctx-stat">
+    → <strong>USD 4.166</strong> por productor primario al año. Contra <strong>USD 6,7 millones</strong> promedio por entidad.
+  </div>
+</aside>
+
+<div class="subsection-header reveal">
+  <span class="kicker">Comparativa internacional</span>
+  <h3 class="section-h3">El precio que el FET termina sosteniendo no es el del productor: es el del acopiador.</h3>
+  <p class="sub-lead">Argentina paga al productor aproximadamente la mitad de lo que paga Brasil. Cuando se suma el FET, ambos precios se equiparan. La diferencia que debería ser margen del productor termina siendo margen del acopio.</p>
+</div>
+
+<div class="chart-wrap reveal">
+  <div class="chart-card">
+    <div class="chart-card-header">
+      <h4 class="chart-card-title">Precio de acopio Virginia · Argentina vs. Brasil</h4>
+      <span class="chart-card-meta">USD / kg · 2016-2023</span>
+    </div>
+    <div class="chart-canvas-container">
+      <canvas id="priceChart" aria-label="Gráfico comparativo de precios de acopio del tabaco Virginia entre Argentina, Argentina+FET y Brasil"></canvas>
+    </div>
+    <p class="chart-footnote">
+      Datos ilustrativos para validación visual; en la implementación final se reemplazarán por los valores precisos del estudio comparativo. La conclusión cualitativa, sin embargo, es la que sostiene el libro: el "Argentina + FET" se acerca al precio brasileño, mientras el "Argentina solo" queda persistentemente por debajo.
+    </p>
+  </div>
+</div>
+
+<div class="subsection-header reveal">
+  <span class="kicker">La paradoja del reparto</span>
+  <h3 class="section-h3">40% a la oferta, 60% a la demanda.</h3>
+  <p class="sub-lead">En cualquier economía de mercado, el subsidio agrícola se diseña para fortalecer la oferta. El FET hace lo contrario.</p>
+</div>
+
+<div class="split-wrap reveal">
+  <div class="split-card">
+    <h4 class="split-title">Hacia dónde fluye realmente el dinero del FET</h4>
+    <div class="split-meta">Reparto efectivo por destino económico</div>
+
+    <div class="split-bar">
+      <div class="part offer">
+        <div class="split-percent">40%</div>
+        <div class="split-tag">a la oferta · productor</div>
+      </div>
+      <div class="part demand">
+        <div class="split-percent">60%</div>
+        <div class="split-tag">a la demanda · acopiador</div>
+      </div>
+    </div>
+
+    <div class="split-foot">
+      <p>
+        <strong>Oferta (40%)</strong>
+        Lo que llega al productor primario, vía precio FET directo y vía insumos canalizados por las Unidades Ejecutoras. Llega tarde, en cuotas, en moneda licuada.
+      </p>
+      <p>
+        <strong>Demanda (60%)</strong>
+        Lo que termina capturando el acopiador, gracias a un precio interno sostenido artificialmente bajo. Recibido sin demoras, sin licuación, indirectamente, sin trazabilidad pública.
+      </p>
+    </div>
+
+    <p class="split-conclusion">
+      Originalmente, el productor recibía el 100% del FET. Hoy le llega entre el 30% y el 40%.
+    </p>
+  </div>
+</div>
+
+<div class="spacer-md"></div>
+
+<article class="prose reveal">
+  <p>
+    La asimetría no es accidente, es estructura. Del lado de la oferta hay 16.000 productores; del lado de la demanda, 10 acopiadores que manejan el 90% del volumen. En ese desequilibrio, la negociación individual es imposible y las cooperativas existirían precisamente para corregirlo. Pero <strong>¿cómo controlar a las cooperativas y Cámaras si ellas reciben directamente el 60% de la recaudación del FET?</strong>
+  </p>
+  <p>
+    La respuesta es la que el sector conoce: no se las controla. Se forma una alianza entre las corporaciones internacionales y las cooperativas provinciales, que en conjunto controlan cerca del 90% del mercado y determinan precios, variedades y volúmenes. Las multinacionales no reciben directamente fondos del Estado, pero obtienen el beneficio de pagar un precio de acopio muy por debajo del que pagan en otros países. El FET termina actuando como el mecanismo estabilizador que <em>traslada costos de producción no pagados por los acopiadores hacia el Estado</em>. Una situación inaudita en una economía de mercado.
+  </p>
+</article>
+
+<div class="pullquote reveal">
+  <q>El FET subsidia a los acopios e indirectamente a las multinacionales, permitiendo a los acopiadores pagar un precio por debajo del que corresponde.</q>
+  <footer class="cite">Ibarra, p. 24</footer>
+</div>
+
+<section class="next-tease reveal">
+  <a href="#">
+    <div class="nt-kicker">Continuá · Sección 05</div>
+    <h3 class="nt-title">El director <em>de orquesta</em></h3>
+    <p class="nt-sub">Tres leyes en quince años. Un solo actor en el centro de las tres. La historia regulatoria del tabaco argentino contada como una partitura.</p>
+    <span class="nt-cta">Continuar lectura →</span>
+  </a>
+</section>
+
+<div class="dev-ribbon">Fase 4 · Vertical slice</div>
+
+<script>
+// ===== SCROLL REVEAL =====
+document.addEventListener('DOMContentLoaded', () => {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('is-visible'));
+    return;
+  }
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  );
+  targets.forEach((t) => obs.observe(t));
+
+  // ===== DIAGRAM TOOLTIPS =====
+  const nodes = document.querySelectorAll('.node[data-tooltip]');
+  if (nodes.length) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'fet-tooltip';
+    document.body.appendChild(tooltip);
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const text = node.getAttribute('data-tooltip');
+        if (!text) return;
+        tooltip.textContent = text;
+        tooltip.classList.add('visible');
+      });
+      node.addEventListener('mousemove', (e) => {
+        tooltip.style.left = (e.clientX + 14) + 'px';
+        tooltip.style.top = (e.clientY + 14) + 'px';
+      });
+      node.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+      });
+    });
+  }
+
+  // ===== DIAGRAM ANIMATION =====
+  const wrap = document.querySelector('.diagram-wrap');
+  if (wrap && 'IntersectionObserver' in window) {
+    const obs2 = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          wrap.classList.add('animated');
+          obs2.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    obs2.observe(wrap);
+  } else if (wrap) {
+    wrap.classList.add('animated');
+  }
+});
+
+// ===== CHART =====
+function loadChartJS() {
+  return new Promise((resolve, reject) => {
+    if (window.Chart) return resolve(window.Chart);
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+    s.onload = () => resolve(window.Chart);
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+const chartData = {
+  años: ["2016","2017","2018","2019","2020","2021","2022","2023"],
+  brasil: [2.30, 2.45, 2.55, 2.70, 2.85, 2.95, 3.10, 3.25],
+  argentina_con_fet: [2.05, 2.15, 2.30, 2.45, 2.60, 2.70, 2.85, 3.00],
+  argentina_sola: [1.10, 1.20, 1.25, 1.30, 1.40, 1.45, 1.55, 1.65]
+};
+
+function initChart() {
+  const canvas = document.getElementById('priceChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  new window.Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartData.años,
+      datasets: [
+        { label: 'Brasil (sin FET)', data: chartData.brasil, backgroundColor: '#2a1f15', borderRadius: 2, barPercentage: 0.85, categoryPercentage: 0.7 },
+        { label: 'Argentina + FET', data: chartData.argentina_con_fet, backgroundColor: '#b89031', borderRadius: 2, barPercentage: 0.85, categoryPercentage: 0.7 },
+        { label: 'Argentina (precio de acopio solo)', data: chartData.argentina_sola, backgroundColor: '#c8392e', borderRadius: 2, barPercentage: 0.85, categoryPercentage: 0.7 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 1100, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { position: 'bottom', align: 'start', labels: { font: { family: 'Inter', size: 12, weight: '500' }, color: '#2a1f15', padding: 16, boxWidth: 14, boxHeight: 14 } },
+        tooltip: {
+          backgroundColor: '#2a1f15',
+          titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+          bodyFont: { family: 'Inter', size: 13 },
+          padding: 12, cornerRadius: 4, displayColors: true,
+          callbacks: { label: (ctx) => ` ${ctx.dataset.label}: USD ${ctx.parsed.y.toFixed(2)} / kg` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#6b5d4d' }, border: { color: '#d8cdb8' } },
+        y: { beginAtZero: true, grid: { color: 'rgba(216, 205, 184, 0.5)' }, ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#6b5d4d', callback: (v) => 'USD ' + v.toFixed(2) }, border: { display: false } }
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.querySelector('.chart-wrap');
+  if (!wrap) return;
+  if (!('IntersectionObserver' in window)) { loadChartJS().then(initChart); return; }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        loadChartJS().then(initChart);
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.15 });
+  obs.observe(wrap);
+});
+</script>
+
+</body>
+</html>

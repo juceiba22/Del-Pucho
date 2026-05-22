@@ -1,0 +1,93 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  emphasis?: string;
+  description: string;
+  href?: string;
+}
+const { kicker, title, emphasis, description, href = '#' } = Astro.props;
+const titleHtml = emphasis ? title.replace(emphasis, `<em>${emphasis}</em>`) : title;
+---
+
+<section class="next-tease reveal">
+  <a href={href} class="next-link">
+    <div class="nt-kicker">{kicker}</div>
+    <h3 class="nt-title" set:html={titleHtml} />
+    <p class="nt-sub">{description}</p>
+    <span class="nt-cta">Continuar lectura →</span>
+  </a>
+</section>
+
+<style>
+  .next-tease {
+    background: var(--ink-on-paper);
+    color: var(--paper);
+    margin-top: 8rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  .next-link {
+    display: block;
+    padding: 5rem clamp(1.5rem, 5vw, 3rem);
+    transition: background 0.3s ease;
+  }
+
+  .next-link:hover {
+    background: #1f1610;
+  }
+
+  .nt-kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 1.25rem;
+  }
+
+  .nt-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .nt-title :global(em) {
+    font-style: italic;
+    color: var(--gold-soft);
+    font-weight: 300;
+  }
+
+  .nt-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(244, 234, 215, 0.7);
+    max-width: 540px;
+    margin: 0 auto 2rem;
+    line-height: 1.5;
+    font-size: 1.05rem;
+  }
+
+  .nt-cta {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--gold-soft);
+    border-radius: 999px;
+    transition: all 0.25s ease;
+  }
+
+  .next-link:hover .nt-cta {
+    background: var(--gold-soft);
+    color: var(--ink-on-paper);
+  }
+</style>

@@ -1,0 +1,248 @@
+/* =========================================================
+   SISTEMA DE DISEÑO — Del Pucho al Cigarrillo Electrónico
+   ========================================================= */
+
+:root {
+  /* MODO LECTURA (claro) */
+  --paper: #f4ead7;
+  --paper-soft: #faf6ec;
+  --paper-deep: #ebe0c8;
+  --ink-on-paper: #2a1f15;
+  --ink-soft: #6b5d4d;
+  --ink-muted: #9c8e7c;
+  --rule: #d8cdb8;
+  --rule-strong: #b8ac95;
+
+  /* MODO INMERSIÓN (oscuro) */
+  --bg-dark: #14100c;
+  --bg-warm: #1c1610;
+  --ink: #f4ead7;
+  --ink-on-dark-soft: #b8ad97;
+  --ink-on-dark-muted: #6b5d4d;
+  --rule-on-dark: rgba(244, 234, 215, 0.12);
+
+  /* ACENTOS (compartidos) */
+  --ember: #c8392e;
+  --ember-soft: #e3735f;
+  --gold: #b89031;
+  --gold-soft: #d4a747;
+
+  /* TIPOGRAFÍAS */
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+
+  /* ESCALAS */
+  --max-prose: 680px;
+  --max-section: 1080px;
+  --max-wide: 1200px;
+  --space-section: clamp(4rem, 8vw, 8rem);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink-on-paper);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Grano sutil global */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   ANIMACIONES DE SCROLL (estado base, GSAP las controla)
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Si el usuario tiene reduce-motion, no escondemos nada */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   TIPOGRAFÍA — JERARQUÍAS
+   ========================================================= */
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ember);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.section-h2 {
+  font-family: var(--serif);
+  font-variation-settings: "SOFT" 0, "opsz" 144;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.75rem 0;
+}
+
+.section-h2 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ember);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+.section-h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem 0;
+  max-width: 720px;
+}
+
+.lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+/* =========================================================
+   LAYOUT — CONTENEDORES
+   ========================================================= */
+.prose {
+  max-width: var(--max-prose);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2rem);
+}
+
+.prose p {
+  font-family: var(--sans);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
+  color: var(--ink-on-paper);
+}
+
+.prose p.lead-paragraph::first-letter {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  float: left;
+  margin: 0.45rem 0.65rem -0.2rem 0;
+  color: var(--ember);
+}
+
+.prose strong { font-weight: 600; }
+.prose em { color: var(--ink-soft); font-style: italic; }
+
+.section-wide {
+  max-width: var(--max-section);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+
+.section-extra-wide {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.spacer-sm { height: 3rem; }
+.spacer-md { height: 5rem; }
+.spacer-lg { height: 7rem; }
+.spacer-xl { height: var(--space-section); }
+
+/* =========================================================
+   GLOSARIO — términos subrayados
+   ========================================================= */
+.glossary {
+  border-bottom: 1px dotted var(--gold);
+  cursor: help;
+  padding-bottom: 1px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.glossary:hover {
+  color: var(--gold);
+}
+
+.glossary[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--ink-on-paper);
+  color: var(--paper);
+  padding: 0.75rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  border-radius: 4px;
+  white-space: normal;
+  width: max-content;
+  max-width: 280px;
+  z-index: 10;
+  pointer-events: none;
+  letter-spacing: 0;
+  text-transform: none;
+}

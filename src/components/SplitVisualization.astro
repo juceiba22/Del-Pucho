@@ -1,0 +1,155 @@
+---
+// Visualización del reparto 40/60 (oferta vs demanda) del FET.
+---
+
+<div class="split-wrap reveal">
+  <div class="split-card">
+    <h4 class="split-title">Hacia dónde fluye realmente el dinero del FET</h4>
+    <div class="split-meta">Reparto efectivo por destino económico</div>
+
+    <div class="split-bar">
+      <div class="part offer" data-target-width="40">
+        <div class="split-percent">40%</div>
+        <div class="split-tag">a la oferta · productor</div>
+      </div>
+      <div class="part demand" data-target-width="60">
+        <div class="split-percent">60%</div>
+        <div class="split-tag">a la demanda · acopiador</div>
+      </div>
+    </div>
+
+    <div class="split-foot">
+      <p>
+        <strong>Oferta (40%)</strong>
+        Lo que llega al productor primario, vía precio FET directo y vía insumos canalizados por las Unidades Ejecutoras. Llega tarde, en cuotas, en moneda licuada.
+      </p>
+      <p>
+        <strong>Demanda (60%)</strong>
+        Lo que termina capturando el acopiador, gracias a un precio interno sostenido artificialmente bajo. Recibido sin demoras, sin licuación, indirectamente, sin trazabilidad pública.
+      </p>
+    </div>
+
+    <p class="split-conclusion">
+      Originalmente, el productor recibía el 100% del FET. Hoy le llega entre el 30% y el 40%.
+    </p>
+  </div>
+</div>
+
+<style>
+  .split-wrap {
+    max-width: var(--max-section);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .split-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2.5rem clamp(1.25rem, 3vw, 3rem);
+  }
+
+  .split-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+  }
+
+  .split-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  .split-bar {
+    display: flex;
+    height: 80px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .split-bar .part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1.5rem;
+    transition: filter 0.25s ease, flex 1.2s ease-out;
+  }
+
+  .split-bar .part:hover { filter: brightness(0.95); }
+
+  /* Animación: empiezan en 50/50 y se ajustan a 40/60 cuando se ven */
+  .split-bar .part.offer { flex: 50; background: var(--gold-soft); color: var(--ink-on-paper); }
+  .split-bar .part.demand { flex: 50; background: var(--ember); color: #fff; }
+
+  .reveal.is-visible .split-bar .part.offer { flex: 40; }
+  .reveal.is-visible .split-bar .part.demand { flex: 60; }
+
+  .split-percent {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+
+  .split-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.35rem;
+    opacity: 0.85;
+  }
+
+  .split-foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .split-foot p {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .split-foot p strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-on-paper);
+    margin-bottom: 0.5rem;
+  }
+
+  .split-conclusion {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    color: var(--ink-on-paper);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .split-foot { grid-template-columns: 1fr; }
+    .split-bar .part { padding: 0 1rem; }
+    .split-percent { font-size: 1.7rem; }
+    .split-tag { font-size: 0.6rem; }
+  }
+</style>

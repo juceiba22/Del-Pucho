@@ -1,0 +1,76 @@
+---
+interface Props {
+  kicker: string;
+  title: string;
+  emphasis?: string;
+  lead?: string;
+  variant?: 'main' | 'sub';
+}
+
+const { kicker, title, emphasis, lead, variant = 'main' } = Astro.props;
+---
+
+{variant === 'main' ? (
+  <header class="section-header reveal">
+    <div class="kicker decorated">{kicker}</div>
+    <h2 class="section-h2" set:html={emphasis ? title.replace(emphasis, `<em>${emphasis}</em>`) : title} />
+    {lead && <p class="lead">{lead}</p>}
+  </header>
+) : (
+  <div class="subsection-header reveal">
+    <div class="kicker sub">{kicker}</div>
+    <h3 class="section-h3">{title}</h3>
+    {lead && <p class="sub-lead">{lead}</p>}
+  </div>
+)}
+
+<style>
+  .section-header {
+    text-align: center;
+    padding: 6rem clamp(1.5rem, 5vw, 3rem) 4rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .kicker.decorated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .kicker.decorated::before,
+  .kicker.decorated::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--ember);
+    opacity: 0.5;
+  }
+
+  .lead {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .subsection-header {
+    max-width: var(--max-section);
+    margin: 7rem auto 3rem;
+    padding: 4rem clamp(1.5rem, 5vw, 3rem) 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .kicker.sub {
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .sub-lead {
+    font-family: var(--sans);
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0;
+  }
+</style>

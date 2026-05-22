@@ -1,0 +1,335 @@
+---
+// Diagrama interactivo del flujo del dinero del FET.
+// Cada nodo tiene tooltip al hover.
+---
+
+<div class="diagram-wrap reveal">
+  <div class="diagram-frame">
+    <svg viewBox="0 0 1000 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fet-diagram-title">
+      <title id="fet-diagram-title">Flujo del dinero del Fondo Especial del Tabaco</title>
+
+      {/* GRADIENTES */}
+      <defs>
+        <linearGradient id="line-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#b8ac95" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#b8ac95" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="line-grad-critical" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c8392e" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#c8392e" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+
+      {/* FLUJOS (drawn first to sit under nodes) */}
+      <g class="flow-lines">
+        {/* Industria → Coordinación */}
+        <path class="flow-line draw" d="M 500 100 L 500 170" data-len="70"/>
+        <polygon class="arrow" points="495,170 505,170 500,180" fill="#b8ac95"/>
+        <text class="flow-label" x="540" y="140">7% sobre ventas</text>
+
+        {/* Coordinación → Provincias */}
+        <path class="flow-line draw" d="M 500 250 L 500 320" data-len="70"/>
+        <polygon class="arrow" points="495,320 505,320 500,330" fill="#b8ac95"/>
+        <text class="flow-label" x="558" y="290">100% transferido</text>
+
+        {/* Provincias → Split point */}
+        <path class="flow-line draw" d="M 500 400 L 500 450" data-len="50"/>
+
+        {/* Split → Productor (curve) */}
+        <path class="flow-line draw" d="M 500 450 Q 500 490 360 490 Q 200 490 200 540" data-len="220"/>
+        <polygon class="arrow" points="195,540 205,540 200,550" fill="#b8ac95"/>
+        <text class="flow-label percent muted" x="320" y="475">35%</text>
+
+        {/* Split → Unidades (curve, critical) */}
+        <path class="flow-line critical draw" d="M 500 450 Q 500 490 640 490 Q 800 490 800 540" data-len="220"/>
+        <polygon class="arrow" points="795,540 805,540 800,550" fill="#c8392e"/>
+        <text class="flow-label percent" x="680" y="475">65%</text>
+
+        {/* Unidades → Insumos */}
+        <path class="flow-line critical draw" d="M 800 620 L 800 680" data-len="60"/>
+        <polygon class="arrow" points="795,680 805,680 800,690" fill="#c8392e"/>
+        <text class="flow-label" x="930" y="655" text-anchor="end">vía POAs</text>
+      </g>
+
+      {/* NODES */}
+      <g class="node" data-tooltip="Massalin, BAT, Sarandí, Bronway. Declaran ventas; sobre ese valor se calcula el 7% que alimenta el FET.">
+        <rect x="380" y="30" width="240" height="70" rx="3"/>
+        <text class="node-title" x="500" y="60">INDUSTRIA</text>
+        <text class="node-subtitle" x="500" y="80">Declara ventas de cigarrillos</text>
+      </g>
+
+      <g class="node" data-tooltip="Oficina nacional dentro de la Secretaría de Agricultura, Ganadería y Pesca. Recauda y gira el FET a las provincias.">
+        <rect x="350" y="180" width="300" height="70" rx="3"/>
+        <text class="node-title" x="500" y="210">COORDINACIÓN DEL TABACO</text>
+        <text class="node-subtitle" x="500" y="230">Sec. Agricultura, Ganadería y Pesca</text>
+      </g>
+
+      <g class="node" data-tooltip="Salta, Jujuy, Tucumán, Catamarca, Misiones, Corrientes, Chaco. Reciben el 100% del FET y lo distribuyen.">
+        <rect x="350" y="330" width="300" height="70" rx="3"/>
+        <text class="node-title" x="500" y="360">GOBIERNOS PROVINCIALES</text>
+        <text class="node-subtitle" x="500" y="380">7 jurisdicciones tabacaleras</text>
+      </g>
+
+      <g class="node" data-tooltip="Entre 16.000 y 19.000 productores. Reciben el precio FET en 2 cuotas, hasta 3 meses después, en moneda licuada por inflación.">
+        <rect x="60" y="540" width="280" height="80" rx="3"/>
+        <text class="node-title" x="200" y="572">PRODUCTOR PRIMARIO</text>
+        <text class="node-subtitle" x="200" y="590">"Precio FET" complementario</text>
+        <text class="node-subtitle" x="200" y="606">~18.000 productores</text>
+      </g>
+
+      <g class="node critical" data-tooltip="Cámaras y Cooperativas. Las autoridades son frecuentemente también funcionarios provinciales. Manejan el 65% del FET vía POAs aprobados en cadena.">
+        <rect x="660" y="540" width="280" height="80" rx="3"/>
+        <text class="node-title" x="800" y="572">UNIDADES EJECUTORAS</text>
+        <text class="node-subtitle" x="800" y="590">Cámaras y Cooperativas</text>
+        <text class="node-subtitle" x="800" y="606">CTJ · COPROTAB · CTM</text>
+      </g>
+
+      <g class="node" data-tooltip="Fertilizantes, sistemas de riego, semillas. Lo que en teoría debería llegar al productor vía Unidades Ejecutoras.">
+        <rect x="660" y="690" width="280" height="70" rx="3"/>
+        <text class="node-title" x="800" y="720">INSUMOS / INFRAESTRUCTURA</text>
+        <text class="node-subtitle" x="800" y="740">Fertilizantes, riego, semillas</text>
+      </g>
+
+      {/* FOOTNOTES */}
+      <text class="footnote-text" x="60" y="650">⚠ Pagos en 2 cuotas, hasta 3 meses después,</text>
+      <text class="footnote-text" x="60" y="666">licuados por inflación.</text>
+
+      <text class="footnote-text" x="660" y="650">⚠ Autoridades cooperativas y funcionarios</text>
+      <text class="footnote-text" x="660" y="666">provinciales suelen ser las mismas personas.</text>
+    </svg>
+
+    <div class="diagram-legend">
+      <span><span class="swatch"></span>Flujo institucional</span>
+      <span><span class="swatch critical"></span>Flujo críticamente concentrado</span>
+      <span class="hint">↟ Pasá el cursor sobre cada caja</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .diagram-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+
+  .diagram-frame {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2.5rem clamp(1rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  .diagram-frame svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  /* NODES */
+  .node { cursor: help; }
+
+  .node rect {
+    fill: var(--paper);
+    stroke: var(--rule-strong);
+    stroke-width: 1.5;
+    transition: all 0.3s ease;
+  }
+
+  .node:hover rect {
+    fill: var(--paper-deep);
+    stroke: var(--ember);
+    stroke-width: 2;
+  }
+
+  .node.critical rect {
+    fill: #f9e8de;
+    stroke: var(--ember);
+    stroke-width: 1.5;
+  }
+
+  .node.critical:hover rect {
+    fill: #f5d6c4;
+  }
+
+  .node-title {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    fill: var(--ink-on-paper);
+    text-anchor: middle;
+    pointer-events: none;
+  }
+
+  .node-subtitle {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 10px;
+    fill: var(--ink-soft);
+    text-anchor: middle;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+
+  /* FLOW LINES */
+  .flow-line {
+    stroke: var(--rule-strong);
+    stroke-width: 1.8;
+    fill: none;
+  }
+
+  .flow-line.critical {
+    stroke: var(--ember);
+    stroke-width: 2.5;
+  }
+
+  /* Animación de "dibujado" controlada por GSAP en init */
+  .flow-line.draw {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+  }
+
+  .arrow { opacity: 0; transition: opacity 0.4s ease; }
+
+  .diagram-wrap.animated .flow-line.draw {
+    animation: draw-line 1.2s ease-out forwards;
+  }
+
+  .diagram-wrap.animated .arrow { opacity: 1; transition-delay: 1s; }
+
+  @keyframes draw-line {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-line.draw { stroke-dashoffset: 0; }
+    .arrow { opacity: 1; }
+  }
+
+  /* LABELS */
+  .flow-label {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 11px;
+    fill: var(--ink-on-paper);
+    text-anchor: middle;
+  }
+
+  .flow-label.percent {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    fill: var(--ember);
+  }
+
+  .flow-label.percent.muted { fill: var(--gold); }
+
+  .footnote-text {
+    font-family: var(--sans);
+    font-size: 11px;
+    fill: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* LEGEND */
+  .diagram-legend {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .diagram-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .diagram-legend .swatch {
+    width: 16px;
+    height: 3px;
+    background: var(--rule-strong);
+  }
+
+  .diagram-legend .swatch.critical { background: var(--ember); }
+
+  .diagram-legend .hint { color: var(--gold); }
+
+  /* HOVER TOOLTIPS via JS */
+  .fet-tooltip {
+    position: fixed;
+    background: var(--ink-on-paper);
+    color: var(--paper);
+    padding: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    border-radius: 4px;
+    max-width: 280px;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .fet-tooltip.visible { opacity: 1; }
+
+  @media (max-width: 640px) {
+    .diagram-legend { font-size: 0.6rem; gap: 1rem; }
+  }
+</style>
+
+<script>
+  // Tooltips para los nodos del diagrama
+  document.addEventListener('DOMContentLoaded', () => {
+    const nodes = document.querySelectorAll('.node[data-tooltip]');
+    if (!nodes.length) return;
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'fet-tooltip';
+    document.body.appendChild(tooltip);
+
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', (e) => {
+        const text = node.getAttribute('data-tooltip');
+        if (!text) return;
+        tooltip.textContent = text;
+        tooltip.classList.add('visible');
+      });
+
+      node.addEventListener('mousemove', (e) => {
+        const me = e as MouseEvent;
+        tooltip.style.left = (me.clientX + 14) + 'px';
+        tooltip.style.top = (me.clientY + 14) + 'px';
+      });
+
+      node.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+      });
+    });
+
+    // Activar animación cuando el diagrama entra en pantalla
+    const wrap = document.querySelector('.diagram-wrap');
+    if (wrap && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            wrap.classList.add('animated');
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(wrap);
+    } else if (wrap) {
+      wrap.classList.add('animated');
+    }
+  });
+</script>
