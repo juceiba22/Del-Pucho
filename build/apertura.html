@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apertura · Del Pucho al Cigarrillo Electrónico</title>
+<meta name="description" content="Un ensayo de Julio Ibarra sobre el sector tabacalero argentino, el Fondo Especial del Tabaco y la pivotada hacia el cigarrillo electrónico.">
+
+<meta property="og:title" content="Apertura · Del Pucho al Cigarrillo Electrónico">
+<meta property="og:description" content="Una lectura crítica sobre poder regulatorio, lobby corporativo y captura del Estado.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_AR">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23c8392e'/%3E%3Ctext x='32' y='42' font-family='Georgia' font-size='32' fill='%23f4ead7' text-anchor='middle' font-style='italic'%3EP%3C/text%3E%3C/svg%3E">
+
+<style>
+:root {
+  --bg-dark: #14100c;
+  --bg-warm: #1c1610;
+  --ink: #f4ead7;
+  --ink-soft: #b8ad97;
+  --ink-muted: #6b5d4d;
+  --paper: #f4ead7;
+  --ink-on-paper: #2a1f15;
+  --rule: #d8cdb8;
+  --rule-on-dark: rgba(244, 234, 215, 0.12);
+  --ember: #c8392e;
+  --gold: #b89031;
+  --gold-soft: #d4a747;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-dark);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::after {
+  content: ''; position: fixed; inset: 0;
+  pointer-events: none; z-index: 100; opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 2.5rem clamp(1.5rem, 5vw, 4.5rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 85% 15%, rgba(200, 57, 46, 0.10), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 10% 85%, rgba(200, 168, 73, 0.07), transparent 65%);
+  pointer-events: none;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 1; position: relative;
+}
+.top-bar .imprint {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: var(--gold-soft);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1100px;
+  z-index: 1;
+  position: relative;
+  padding: 4rem 0;
+}
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ember);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: hero-fade 0.9s ease-out 0.15s forwards;
+}
+.kicker::before {
+  content: ''; width: 32px; height: 1px;
+  background: var(--ember);
+}
+.headline {
+  font-family: var(--serif);
+  font-variation-settings: "SOFT" 0, "opsz" 144;
+  font-weight: 400;
+  font-size: clamp(2.75rem, 7.5vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0 0 3.5rem 0;
+  max-width: 16ch;
+  color: var(--ink);
+  opacity: 0;
+  animation: hero-fade-up 1.1s ease-out 0.3s forwards;
+}
+.headline em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold-soft);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+.stat-block {
+  display: grid;
+  grid-template-columns: minmax(auto, 220px) 1fr;
+  gap: 2.5rem 3rem;
+  align-items: center;
+  max-width: 880px;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--rule-on-dark);
+  border-bottom: 1px solid var(--rule-on-dark);
+  opacity: 0;
+  animation: hero-fade-up 1.1s ease-out 0.6s forwards;
+}
+.stat-number {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  color: var(--ember);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variation-settings: "SOFT" 0, "opsz" 144;
+}
+.stat-label {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.stat-label strong { color: var(--ink); font-weight: 500; }
+.stat-label .accent { color: var(--ember); font-weight: 500; }
+.scroll-indicator {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  z-index: 1; position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: hero-fade 0.9s ease-out 1.4s forwards, float 2.5s ease-in-out 2s infinite;
+}
+@keyframes hero-fade { to { opacity: 1; } }
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kicker, .headline, .stat-block, .scroll-indicator {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+@media (max-width: 768px) {
+  .stat-block { grid-template-columns: 1fr; gap: 1.5rem; }
+  .top-bar { gap: 1rem; }
+  .top-bar > span:first-child { display: none; }
+}
+
+/* ===== QUOTE FULLSCREEN ===== */
+.quote-section {
+  min-height: 95vh;
+  display: grid;
+  place-items: center;
+  padding: 6rem clamp(1.5rem, 5vw, 4rem);
+  background: var(--bg-warm);
+  position: relative;
+  overflow: hidden;
+}
+.quote-section::before {
+  content: ''; position: absolute;
+  top: -1px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 1px;
+  background: var(--gold-soft); opacity: 0.4;
+}
+.quote-container { max-width: 920px; position: relative; text-align: center; }
+.quote-mark {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(8rem, 14vw, 14rem);
+  color: var(--gold-soft);
+  line-height: 1;
+  opacity: 0.35;
+  margin-bottom: -2.5rem;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  line-height: 1.4;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+blockquote em { font-style: italic; color: var(--gold-soft); }
+.signature {
+  display: block;
+  margin-top: 3rem;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+.signature::before { content: '— '; }
+
+/* ===== SECTION MENU ===== */
+.section-menu {
+  padding: 5rem clamp(1.5rem, 5vw, 4rem) 7rem;
+  text-align: center;
+  background: var(--bg-dark);
+  color: var(--ink);
+}
+.sm-kicker {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ember);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.sm-text {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  line-height: 1.55;
+}
+.sm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.75rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.sm-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-on-dark);
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  text-align: left;
+}
+.sm-item.ready { cursor: pointer; }
+.sm-item.ready:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+.sm-item.upcoming { opacity: 0.5; cursor: not-allowed; }
+.sm-num {
+  font-weight: 600;
+  color: var(--ember);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.sm-item.upcoming .sm-num { color: var(--ink-muted); }
+.sm-title {
+  text-transform: none;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+.sm-tag {
+  font-size: 0.6rem;
+  color: var(--gold-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .sm-grid { grid-template-columns: 1fr; }
+}
+
+/* RIBBON DEV */
+.dev-ribbon {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: var(--ember);
+  color: #fff;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  z-index: 200;
+  box-shadow: 0 4px 20px rgba(200, 57, 46, 0.3);
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <header class="top-bar">
+    <span>Ibarra · Ediciones Agrotabaco · 2026</span>
+    <span class="imprint">Del Pucho al Cigarrillo Electrónico</span>
+  </header>
+
+  <div class="hero-body">
+    <div class="kicker">Un ensayo sobre tabaco, leyes y poder en Argentina</div>
+    <h1 class="headline">El humo no siempre está <em>donde parece.</em></h1>
+
+    <div class="stat-block">
+      <div class="stat-number">76%</div>
+      <div class="stat-label">
+        del valor de cada paquete de cigarrillos vendido en Argentina <strong>va al Estado</strong>. La industria captura buena parte del resto. ¿Y entonces por qué la producción cayó un <span class="accent">39% en una década</span> y el productor primario está cada vez peor?
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>▼</span>
+    <span>Seguí leyendo</span>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="quote-container">
+    <div class="quote-mark">"</div>
+    <blockquote class="reveal">
+      Las crisis persistentes no siempre son fallas del sistema; a veces son el resultado de un sistema que funciona <em>exactamente como fue diseñado</em> —o tolerado— para funcionar.
+      <span class="signature">Julio Ibarra · Prólogo</span>
+    </blockquote>
+  </div>
+</section>
+
+<section class="section-menu">
+  <div class="sm-kicker">A continuación</div>
+  <p class="sm-text">
+    La cadena del tabaco como mapa de poder. El FET como mecanismo distorsivo. Las tres leyes que reordenaron el mercado. Y el nuevo lobby que ya está empezando.
+  </p>
+  <div class="sm-grid">
+    <span class="sm-item upcoming"><span class="sm-num">01</span><span class="sm-title">El recorrido</span><span class="sm-tag">Próximamente</span></span>
+    <span class="sm-item upcoming"><span class="sm-num">02</span><span class="sm-title">El mapa del sector</span><span class="sm-tag">Próximamente</span></span>
+    <span class="sm-item upcoming"><span class="sm-num">03</span><span class="sm-title">La crisis silenciosa</span><span class="sm-tag">Próximamente</span></span>
+    <a class="sm-item ready" href="./fet.html"><span class="sm-num">04</span><span class="sm-title">La máquina del FET</span></a>
+    <span class="sm-item upcoming"><span class="sm-num">05</span><span class="sm-title">El director de orquesta</span><span class="sm-tag">Próximamente</span></span>
+    <span class="sm-item upcoming"><span class="sm-num">06</span><span class="sm-title">El nuevo lobby</span><span class="sm-tag">Próximamente</span></span>
+    <span class="sm-item upcoming"><span class="sm-num">07</span><span class="sm-title">¿Conspiración o desidia?</span><span class="sm-tag">Próximamente</span></span>
+  </div>
+</section>
+
+<div class="dev-ribbon">Fase 5.1 · Apertura</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const targets = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(t => t.classList.add('is-visible'));
+    return;
+  }
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  );
+  targets.forEach((t) => obs.observe(t));
+});
+</script>
+</body>
+</html>

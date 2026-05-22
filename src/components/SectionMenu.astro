@@ -1,0 +1,142 @@
+---
+// Menú de navegación entre las 7 secciones del sitio.
+// Marca cuáles están publicadas y cuáles están "Próximamente" (sin link).
+
+interface Section {
+  num: string;
+  title: string;
+  href: string;
+  ready: boolean;
+}
+
+const sections: Section[] = [
+  { num: '01', title: 'El recorrido',                href: '/01-recorrido', ready: false },
+  { num: '02', title: 'El mapa del sector',          href: '/02-mapa',      ready: false },
+  { num: '03', title: 'La crisis silenciosa',        href: '/03-crisis',    ready: false },
+  { num: '04', title: 'La máquina del FET',          href: '/04-fet',       ready: true  },
+  { num: '05', title: 'El director de orquesta',     href: '/05-director',  ready: false },
+  { num: '06', title: 'El nuevo lobby',              href: '/06-lobby',     ready: false },
+  { num: '07', title: '¿Conspiración o desidia?',    href: '/07-cierre',    ready: false },
+];
+
+interface Props {
+  variant?: 'dark' | 'light';
+}
+const { variant = 'dark' } = Astro.props;
+---
+
+<section class={`section-menu ${variant}`}>
+  <div class="sm-kicker">A continuación</div>
+  <p class="sm-text">
+    La cadena del tabaco como mapa de poder. El FET como mecanismo distorsivo. Las tres leyes que reordenaron el mercado. Y el nuevo lobby que ya está empezando.
+  </p>
+  <div class="sm-grid">
+    {sections.map(s => (
+      s.ready ? (
+        <a href={s.href} class="sm-item ready">
+          <span class="sm-num">{s.num}</span>
+          <span class="sm-title">{s.title}</span>
+        </a>
+      ) : (
+        <span class="sm-item upcoming" aria-disabled="true">
+          <span class="sm-num">{s.num}</span>
+          <span class="sm-title">{s.title}</span>
+          <span class="sm-tag">Próximamente</span>
+        </span>
+      )
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-menu {
+    padding: 5rem clamp(1.5rem, 5vw, 4rem) 7rem;
+    text-align: center;
+  }
+  .section-menu.dark { background: var(--bg-dark); color: var(--ink); }
+  .section-menu.light { background: var(--paper); color: var(--ink-on-paper); }
+
+  .sm-kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .sm-text {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    max-width: 720px;
+    margin: 0 auto 3rem;
+    line-height: 1.55;
+  }
+  .section-menu.dark .sm-text { color: var(--ink-on-dark-soft); }
+  .section-menu.light .sm-text { color: var(--ink-soft); }
+
+  .sm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .sm-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    text-align: left;
+  }
+
+  .section-menu.dark .sm-item { border: 1px solid var(--rule-on-dark); color: var(--ink-on-dark-soft); }
+  .section-menu.light .sm-item { border: 1px solid var(--rule); color: var(--ink-soft); }
+
+  .sm-item.ready { cursor: pointer; }
+  .section-menu.dark .sm-item.ready:hover { border-color: var(--gold-soft); color: var(--gold-soft); }
+  .section-menu.light .sm-item.ready:hover { border-color: var(--ember); color: var(--ember); }
+
+  .sm-item.upcoming { opacity: 0.5; cursor: not-allowed; }
+
+  .sm-num {
+    font-weight: 600;
+    color: var(--ember);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .sm-item.upcoming .sm-num { color: var(--ink-on-dark-muted); }
+  .section-menu.light .sm-item.upcoming .sm-num { color: var(--ink-muted); }
+
+  .sm-title {
+    text-transform: none;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    flex: 1;
+  }
+
+  .sm-tag {
+    font-size: 0.6rem;
+    color: var(--gold-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .section-menu.light .sm-tag { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    .sm-grid { grid-template-columns: 1fr; }
+  }
+</style>

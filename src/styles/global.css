@@ -63,6 +63,17 @@ html, body {
   overflow-x: hidden;
 }
 
+/* ============= MODO INMERSIÓN (dark) ============= */
+body.dark {
+  background: var(--bg-dark);
+  color: var(--ink);
+}
+
+body.dark::after {
+  mix-blend-mode: overlay !important;
+  opacity: 0.05 !important;
+}
+
 /* Grano sutil global */
 body::after {
   content: '';

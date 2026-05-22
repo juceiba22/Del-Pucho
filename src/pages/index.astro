@@ -1,135 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import TopNav from '../components/TopNav.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import PullQuote from '../components/PullQuote.astro';
-import ContextBox from '../components/ContextBox.astro';
-import FETDiagram from '../components/FETDiagram.astro';
-import PriceChart from '../components/PriceChart.astro';
-import SplitVisualization from '../components/SplitVisualization.astro';
-import NextSectionTease from '../components/NextSectionTease.astro';
+import Hero from '../components/Hero.astro';
+import QuoteFullscreen from '../components/QuoteFullscreen.astro';
+import SectionMenu from '../components/SectionMenu.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 ---
 
 <Layout
-  title="La máquina del FET"
-  description="El Fondo Especial del Tabaco fue creado en 1972 para sostener al productor. Cincuenta años después, sigue intacto en su forma e invertido en su función."
+  title="Apertura"
+  description="Un ensayo de Julio Ibarra sobre el sector tabacalero argentino, el Fondo Especial del Tabaco y la pivotada hacia el cigarrillo electrónico. Una lectura crítica sobre poder regulatorio, lobby corporativo y captura del Estado."
+  mode="dark"
 >
-  <TopNav
-    prevHref="#"
-    prevLabel="03 La crisis silenciosa"
-    current="04 La máquina del FET"
-    nextHref="#"
-    nextLabel="05 El director de orquesta"
-  />
-
-  <SectionHeader
-    kicker="Sección 04 · El corazón del argumento"
-    title="La máquina del FET"
-    emphasis="del FET"
-    lead="Un instrumento creado en 1972 para sostener al productor primario que, cincuenta años después, sigue intacto en su forma e invertido en su función."
-  />
-
-  <article class="prose reveal">
-    <p class="lead-paragraph">
-      El Fondo Especial del Tabaco fue creado por la <strong>Ley 19.800</strong> en 1972 con un objetivo declarado: financiar la reconversión del sector hacia las variedades claras —Virginia y Burley— sin que el productor quebrara en el camino. Cincuenta años después, la herramienta sobrevive intacta en su forma, pero invertida en su función.
-    </p>
-    <p>
-      El esquema operativo es claro: un <strong>7%</strong> de las ventas declaradas por la industria se recauda como FET, se gira a las provincias y se distribuye. Un 35% va directo al productor como <em>"precio FET"</em>. El otro 65% va a las <span class="glossary" data-tooltip="Cámaras y cooperativas provinciales que administran el 65% del FET. Ej: CTJ (Jujuy), COPROTAB (Salta), CTM (Misiones).">Unidades Ejecutoras</span> —cámaras y cooperativas— que en teoría financian obras, insumos y desarrollo productivo. En la práctica, ese 65% es administrado por dirigencias que son <strong>simultáneamente autoridades cooperativas y funcionarios provinciales</strong>, transfiriéndose recursos a sí mismas con la prolijidad burocrática de un <span class="glossary" data-tooltip="Plan Operativo Anual. Documento que las Unidades Ejecutoras presentan para acceder a fondos del FET.">POA</span> aprobado en cadena.
-    </p>
-    <p>
-      La consecuencia económica es ineludible. Cuando se compara el precio de acopio argentino con el brasileño, Argentina paga la mitad. Cuando se le suma el FET, los precios se equiparan. <strong>El FET no es un complemento al productor: es el subsidio implícito que permite al acopio pagar por debajo del precio internacional.</strong> Brasil no tiene FET y su productor cobra el doble. Acá, una recaudación parafiscal de USD 175-200 millones anuales termina financiando el margen de las multinacionales que dicen no recibir un peso del Estado.
-    </p>
-  </article>
-
-  <PullQuote>
-    El productor trabaja. El Estado compensa. La industria captura el beneficio estructural.
-  </PullQuote>
-
-  <SectionHeader
-    variant="sub"
-    kicker="Diagrama interactivo"
-    title="El recorrido del dinero"
-    lead="De la venta del paquete al productor, pasando por seis nodos y casi un año de demora. Pasá el cursor sobre cada caja para ver el detalle."
-  />
-
-  <FETDiagram />
-
-  <div class="spacer-md" />
-
-  <article class="prose reveal">
-    <p>
-      En 1995, en pleno auge del neoliberalismo, los países miembros de la OMC firmaron el Acuerdo sobre la Agricultura. Entre otras cosas, estableció un tope de <strong>USD 75 millones anuales</strong> para subsidios directos a unidades productivas. Como el FET recauda entre 175 y 200 millones, el excedente debe canalizarse por otros mecanismos. Argentina creó el <span class="glossary" data-tooltip="Programa de Reconversión de Áreas Tabacaleras. Canaliza fondos del FET vía las Unidades Ejecutoras.">PRAT</span> y lo hizo pasar por las Unidades Ejecutoras. Resultado:
-    </p>
-  </article>
-
-  <ContextBox
-    kicker="Cómo se reparte la torta"
-    title="USD 75 millones para 18.000 productores. USD 100 millones para 15 entidades."
+  <Hero
+    kicker="Un ensayo sobre tabaco, leyes y poder en Argentina"
+    headline="El humo no siempre está donde parece."
+    emphasis="donde parece."
+    statNumber="76%"
+    statLabel=""
   >
-    <p>
-      El precio FET llega al productor en moneda licuada y dos cuotas. El financiamiento de las Unidades Ejecutoras llega en bloque, lo administran cámaras y cooperativas y termina en POAs aprobados en cadena vertical: cooperativa → provincia → coordinación → secretaría → vuelta a la cooperativa.
-    </p>
-    <div class="ctx-stat">
-      → <strong>USD 4.166</strong> por productor primario al año. Contra <strong>USD 6,7 millones</strong> promedio por entidad.
-    </div>
-  </ContextBox>
+    del valor de cada paquete de cigarrillos vendido en Argentina <strong>va al Estado</strong>. La industria captura buena parte del resto. ¿Y entonces por qué la producción cayó un <span class="accent">39% en una década</span> y el productor primario está cada vez peor?
+  </Hero>
 
-  <SectionHeader
-    variant="sub"
-    kicker="Comparativa internacional"
-    title="El precio que el FET termina sosteniendo no es el del productor: es el del acopiador."
-    lead="Argentina paga al productor aproximadamente la mitad de lo que paga Brasil. Cuando se suma el FET, ambos precios se equiparan. La diferencia que debería ser margen del productor termina siendo margen del acopio."
-  />
+  <QuoteFullscreen signature="Julio Ibarra · Prólogo">
+    Las crisis persistentes no siempre son fallas del sistema; a veces son el resultado de un sistema que funciona <em>exactamente como fue diseñado</em> —o tolerado— para funcionar.
+  </QuoteFullscreen>
 
-  <PriceChart />
-
-  <SectionHeader
-    variant="sub"
-    kicker="La paradoja del reparto"
-    title="40% a la oferta, 60% a la demanda."
-    lead="En cualquier economía de mercado, el subsidio agrícola se diseña para fortalecer la oferta. El FET hace lo contrario."
-  />
-
-  <SplitVisualization />
-
-  <div class="spacer-md" />
-
-  <article class="prose reveal">
-    <p>
-      La asimetría no es accidente, es estructura. Del lado de la oferta hay 16.000 productores; del lado de la demanda, 10 acopiadores que manejan el 90% del volumen. En ese desequilibrio, la negociación individual es imposible y las cooperativas existirían precisamente para corregirlo. Pero <strong>¿cómo controlar a las cooperativas y Cámaras si ellas reciben directamente el 60% de la recaudación del FET?</strong>
-    </p>
-    <p>
-      La respuesta es la que el sector conoce: no se las controla. Se forma una alianza entre las corporaciones internacionales y las cooperativas provinciales, que en conjunto controlan cerca del 90% del mercado y determinan precios, variedades y volúmenes. Las multinacionales no reciben directamente fondos del Estado, pero obtienen el beneficio de pagar un precio de acopio muy por debajo del que pagan en otros países. El FET termina actuando como el mecanismo estabilizador que <em>traslada costos de producción no pagados por los acopiadores hacia el Estado</em>. Una situación inaudita en una economía de mercado.
-    </p>
-  </article>
-
-  <PullQuote cite="Ibarra, p. 24">
-    El FET subsidia a los acopios e indirectamente a las multinacionales, permitiendo a los acopiadores pagar un precio por debajo del que corresponde.
-  </PullQuote>
-
-  <NextSectionTease
-    kicker="Continuá · Sección 05"
-    title="El director de orquesta"
-    emphasis="de orquesta"
-    description="Tres leyes en quince años. Un solo actor en el centro de las tres. La historia regulatoria del tabaco argentino contada como una partitura."
-  />
+  <SectionMenu variant="dark" />
 
   <ScrollReveal />
 </Layout>
-
-<style is:global>
-  /* Stat de la caja de contexto */
-  .ctx-stat {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--rule);
-    font-family: var(--mono);
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-  }
-  .ctx-stat strong {
-    color: var(--ember);
-    font-weight: 600;
-  }
-</style>
