@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PullQuote from '../components/PullQuote.astro';
+import ChainOverview from '../components/ChainOverview.astro';
+import RouteStop from '../components/RouteStop.astro';
+import NextSectionTease from '../components/NextSectionTease.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import data from '../data/recorrido.json';
+
+const [p1, p2, p3, p4, p5, p6] = data.paradas;
+---
+
+<Layout
+  title="El recorrido"
+  description="De la planta al kiosco. Seis paradas para entender la cadena del tabaco argentino y los márgenes que se capturan en cada eslabón."
+>
+  <TopNav
+    prevHref="/"
+    prevLabel="Volver al inicio"
+    current="01 El recorrido"
+    nextHref="/02-mapa"
+    nextLabel="02 El mapa del sector"
+  />
+
+  <SectionHeader
+    kicker="Sección 01 · La cadena de valor"
+    title="El recorrido"
+    emphasis="recorrido"
+    lead="De la planta al kiosco, seis paradas. En cada una, un actor distinto. En cada una, una fracción del precio se queda en el camino. Esta es la cadena que el resto del sitio va a desarmar."
+  />
+
+  <article class="prose reveal">
+    <p class="lead-paragraph">
+      Antes de entrar en mapas, gráficos y leyes, conviene seguir físicamente al producto. La hoja de tabaco nace en un campo del norte argentino y termina convertida en un paquete que un kiosquero vende a la madrugada. Entre el campo y el kiosco hay seis paradas. En cada una, alguien agrega valor; en cada una, alguien también lo captura. Este sitio dedica cinco secciones a explicar por qué la captura está sistemáticamente desbalanceada en contra del primer eslabón.
+    </p>
+    <p>
+      Tomá esta sección como un mapa. Las próximas seis paradas son una vista panorámica del recorrido. Las secciones siguientes —el mapa del sector, la crisis silenciosa, la máquina del FET, el director de orquesta, el nuevo lobby— son zooms a los puntos donde el sistema falla. La pregunta del cierre <em>¿conspiración o desidia planificada?</em> sólo se puede responder después de hacer el recorrido completo.
+    </p>
+  </article>
+
+  <div class="spacer-md" />
+
+  <ChainOverview />
+
+  <div class="spacer-md" />
+
+  <PullQuote>
+    De cada $100 que paga el consumidor por un paquete, el productor primario recibe aproximadamente $3.
+  </PullQuote>
+
+  {/* PARADA 01: Productor */}
+  <RouteStop parada={p1}>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* sol */}
+      <circle cx="160" cy="30" r="14" stroke="var(--gold)" />
+      {/* horizonte */}
+      <path d="M 0 110 L 200 110" stroke="var(--ink-muted)" stroke-dasharray="2 4" />
+      {/* surcos */}
+      <path d="M 10 125 Q 100 115 190 130" />
+      <path d="M 10 135 Q 100 128 190 140" />
+      {/* plantas */}
+      <g>
+        <path d="M 30 110 L 30 90 M 25 95 Q 30 88 35 95 M 22 102 Q 30 95 38 102" />
+        <path d="M 60 108 L 60 85 M 54 90 Q 60 82 66 90 M 51 98 Q 60 90 69 98" />
+        <path d="M 90 110 L 90 88 M 84 93 Q 90 85 96 93 M 81 100 Q 90 92 99 100" />
+        <path d="M 120 108 L 120 84 M 114 89 Q 120 81 126 89 M 111 97 Q 120 89 129 97" />
+        <path d="M 150 110 L 150 90 M 144 95 Q 150 87 156 95 M 141 102 Q 150 94 159 102" />
+      </g>
+    </svg>
+  </RouteStop>
+
+  {/* PARADA 02: Curado */}
+  <RouteStop parada={p2} reverse>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* tierra */}
+      <path d="M 0 130 L 200 130" stroke="var(--ink-muted)" />
+      {/* galpón base */}
+      <path d="M 40 130 L 40 75 L 160 75 L 160 130 Z" />
+      {/* techo */}
+      <path d="M 30 75 L 100 35 L 170 75 Z" />
+      {/* puerta */}
+      <path d="M 88 130 L 88 95 L 112 95 L 112 130" />
+      {/* ventanas pequeñas */}
+      <rect x="55" y="90" width="14" height="14" />
+      <rect x="131" y="90" width="14" height="14" />
+      {/* chimenea + humo */}
+      <path d="M 130 50 L 130 30 L 140 30 L 140 50" />
+      <g stroke="var(--gold)" stroke-width="1.2" opacity="0.7">
+        <path d="M 135 25 Q 130 18 138 12 Q 145 6 138 0" />
+        <path d="M 145 22 Q 138 14 148 6" />
+      </g>
+    </svg>
+  </RouteStop>
+
+  {/* PARADA 03: Acopio */}
+  <RouteStop parada={p3}>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* suelo */}
+      <path d="M 0 130 L 200 130" stroke="var(--ink-muted)" />
+      {/* silo 1 grande */}
+      <path d="M 30 130 L 30 50 Q 30 35 55 35 Q 80 35 80 50 L 80 130 Z" />
+      <path d="M 30 65 L 80 65" stroke-dasharray="2 3" opacity="0.6" />
+      {/* silo 2 mediano */}
+      <path d="M 95 130 L 95 65 Q 95 50 115 50 Q 135 50 135 65 L 135 130 Z" />
+      <path d="M 95 80 L 135 80" stroke-dasharray="2 3" opacity="0.6" />
+      {/* silo 3 chico */}
+      <path d="M 150 130 L 150 80 Q 150 70 165 70 Q 180 70 180 80 L 180 130 Z" />
+      {/* cinta transportadora */}
+      <path d="M 0 122 L 30 110" stroke="var(--gold)" stroke-width="1.2" />
+      <path d="M 180 110 L 200 122" stroke="var(--gold)" stroke-width="1.2" />
+    </svg>
+  </RouteStop>
+
+  {/* PARADA 04: Industria */}
+  <RouteStop parada={p4} reverse>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* suelo */}
+      <path d="M 0 130 L 200 130" stroke="var(--ink-muted)" />
+      {/* fábrica base */}
+      <path d="M 15 130 L 15 80 L 100 80 L 100 60 L 150 60 L 150 130 Z" />
+      <path d="M 100 80 L 150 80" />
+      {/* ventanas */}
+      <g stroke-width="1">
+        <rect x="25" y="92" width="10" height="10" />
+        <rect x="42" y="92" width="10" height="10" />
+        <rect x="59" y="92" width="10" height="10" />
+        <rect x="76" y="92" width="10" height="10" />
+        <rect x="25" y="110" width="10" height="10" />
+        <rect x="42" y="110" width="10" height="10" />
+        <rect x="59" y="110" width="10" height="10" />
+        <rect x="76" y="110" width="10" height="10" />
+        <rect x="110" y="92" width="10" height="10" />
+        <rect x="127" y="92" width="10" height="10" />
+        <rect x="110" y="110" width="10" height="10" />
+        <rect x="127" y="110" width="10" height="10" />
+      </g>
+      {/* chimeneas */}
+      <path d="M 165 130 L 165 45 L 175 45 L 175 130" />
+      <path d="M 180 130 L 180 30 L 188 30 L 188 130" />
+      {/* humo */}
+      <g stroke="var(--gold)" stroke-width="1.2" opacity="0.65">
+        <path d="M 170 38 Q 165 30 173 22 Q 180 14 173 6" />
+        <path d="M 184 22 Q 178 14 186 4" />
+      </g>
+    </svg>
+  </RouteStop>
+
+  {/* PARADA 05: Estado */}
+  <RouteStop parada={p5}>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* suelo */}
+      <path d="M 0 135 L 200 135" stroke="var(--ink-muted)" />
+      {/* base */}
+      <path d="M 20 135 L 20 125 L 180 125 L 180 135" />
+      {/* columnas (6) */}
+      <g>
+        <rect x="32" y="65" width="14" height="60" />
+        <rect x="58" y="65" width="14" height="60" />
+        <rect x="84" y="65" width="14" height="60" />
+        <rect x="110" y="65" width="14" height="60" />
+        <rect x="136" y="65" width="14" height="60" />
+        <rect x="162" y="65" width="14" height="60" />
+      </g>
+      {/* entablamento */}
+      <path d="M 18 65 L 182 65 L 182 55 L 18 55 Z" />
+      {/* frontón */}
+      <path d="M 18 55 L 100 25 L 182 55 Z" />
+      {/* detalle frontón */}
+      <circle cx="100" cy="45" r="4" stroke="var(--gold)" stroke-width="1.2" />
+    </svg>
+  </RouteStop>
+
+  {/* PARADA 06: Kiosco */}
+  <RouteStop parada={p6} reverse>
+    <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ember);">
+      {/* vereda */}
+      <path d="M 0 135 L 200 135" stroke="var(--ink-muted)" />
+      {/* poste */}
+      <path d="M 25 135 L 25 60" />
+      <path d="M 20 60 L 30 60" />
+      {/* kiosco cuerpo */}
+      <path d="M 45 135 L 45 70 L 165 70 L 165 135 Z" />
+      {/* mostrador */}
+      <path d="M 45 105 L 165 105" />
+      {/* toldo */}
+      <path d="M 40 70 L 40 55 L 170 55 L 170 70 Z" />
+      {/* franjas toldo */}
+      <g stroke="var(--gold)" stroke-width="1.2">
+        <path d="M 60 55 L 60 70" />
+        <path d="M 80 55 L 80 70" />
+        <path d="M 100 55 L 100 70" />
+        <path d="M 120 55 L 120 70" />
+        <path d="M 140 55 L 140 70" />
+      </g>
+      {/* productos visibles */}
+      <g stroke-width="1">
+        <rect x="56" y="85" width="14" height="16" />
+        <rect x="74" y="85" width="14" height="16" />
+        <rect x="92" y="85" width="14" height="16" />
+        <rect x="110" y="85" width="14" height="16" />
+        <rect x="128" y="85" width="14" height="16" />
+        <rect x="146" y="85" width="14" height="16" />
+      </g>
+      {/* cartel */}
+      <path d="M 65 55 L 65 40 L 145 40 L 145 55" stroke-dasharray="2 3" opacity="0.7" />
+    </svg>
+  </RouteStop>
+
+  <div class="spacer-md" />
+
+  <article class="prose reveal">
+    <p>
+      Lo que acabás de recorrer no es una particularidad técnica del sector tabacalero argentino. Es un patrón: una cadena en la que el primer eslabón —el que aporta el trabajo material y el riesgo climático— recibe la fracción más pequeña del valor agregado, mientras los eslabones intermedios y el Estado capturan el grueso. El FET fue diseñado en 1972 para corregir ese desbalance. Las próximas secciones explican por qué cincuenta años después no sólo no lo corrige: <strong>lo profundiza</strong>.
+    </p>
+    <p>
+      Si tuvieras que llevarte una sola idea de este recorrido, sería esta: <em>el productor primario está estructuralmente solo en la cadena</em>. No tiene poder de fijar precio (lo fija el acopio), no tiene poder de fijar reglas (las fija la industria con apoyo del Estado), y no tiene poder de capturar valor final (lo capturan los impuestos y el comercio). Esa soledad es la condición sin la cual no se entiende ninguno de los problemas que el sitio analiza a continuación.
+    </p>
+  </article>
+
+  <NextSectionTease
+    kicker="Continuá · Sección 02"
+    title="El mapa del sector"
+    emphasis="del sector"
+    description="Las siete provincias tabacaleras y las dos regiones. Dónde está cada productor, cuánto perdió de hectáreas y por qué dos provincias se mueven contra la tendencia general."
+    href="/02-mapa"
+  />
+
+  <ScrollReveal />
+</Layout>

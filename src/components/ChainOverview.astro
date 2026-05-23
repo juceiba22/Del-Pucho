@@ -1,0 +1,247 @@
+---
+import data from '../data/recorrido.json';
+const paradas = data.paradas;
+---
+
+<div class="co-wrap reveal">
+  <div class="co-card">
+    <header class="co-header">
+      <span class="co-kicker">Vista panorámica</span>
+      <h4 class="co-title">Las seis paradas del paquete</h4>
+      <p class="co-sub">Tocá cualquier parada para saltar directo a su explicación. Las flechas marcan la dirección del producto físico; debajo, la dirección del dinero.</p>
+    </header>
+
+    <ol class="co-chain">
+      {paradas.map((p, i) => (
+        <li class="co-link-wrap">
+          <a href={`#parada-${p.id}`} class="co-node">
+            <span class="co-num">{p.numero}</span>
+            <span class="co-name">{p.titulo}</span>
+            <span class="co-actores">{p.actores}</span>
+          </a>
+          {i < paradas.length - 1 && <span class="co-arrow" aria-hidden="true">→</span>}
+        </li>
+      ))}
+    </ol>
+
+    <div class="co-money">
+      <span class="co-money-label">Flujo del dinero</span>
+      <div class="co-money-bar">
+        <div class="co-money-segment seg-1" style="width: 3.2%;">
+          <span class="co-money-pct">3,2%</span>
+          <span class="co-money-actor">Productor</span>
+        </div>
+        <div class="co-money-segment seg-2" style="width: 12%;">
+          <span class="co-money-pct">12%</span>
+          <span class="co-money-actor">Acopio + industria</span>
+        </div>
+        <div class="co-money-segment seg-3" style="width: 80%;">
+          <span class="co-money-pct">80%+</span>
+          <span class="co-money-actor">Estado · Impuestos · Comercio</span>
+        </div>
+        <div class="co-money-segment seg-4" style="width: 4.8%;">
+          <span class="co-money-pct">4,8%</span>
+          <span class="co-money-actor">Resto</span>
+        </div>
+      </div>
+      <p class="co-money-note">De cada $100 que paga el consumidor por un paquete, el productor primario que sembró la hoja recibe aproximadamente $3.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .co-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .co-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .co-header {
+    margin-bottom: 2rem;
+    max-width: 720px;
+  }
+  .co-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .co-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.55rem;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .co-sub {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  .co-chain {
+    list-style: none;
+    margin: 0 0 2.25rem 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .co-link-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .co-node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 140px;
+    padding: 1rem 1rem 0.85rem;
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-top: 3px solid var(--ember);
+    border-radius: 4px;
+    text-align: left;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .co-node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(42, 31, 21, 0.08);
+    border-top-color: var(--gold);
+  }
+  .co-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ember);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+  .co-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--ink-on-paper);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .co-actores {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .co-arrow {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    color: var(--ember);
+    font-weight: 600;
+    align-self: center;
+    padding: 0 0.15rem;
+  }
+
+  .co-money {
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule);
+  }
+  .co-money-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+  .co-money-bar {
+    display: flex;
+    width: 100%;
+    height: 56px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+  }
+  .co-money-segment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0.5rem;
+    overflow: hidden;
+    text-align: center;
+    color: var(--paper);
+    transition: flex-basis 0.3s ease;
+  }
+  .seg-1 { background: var(--ember); }
+  .seg-2 { background: #8c4a36; }
+  .seg-3 { background: var(--ink-on-paper); }
+  .seg-4 { background: var(--ink-soft); }
+
+  .co-money-pct {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .co-money-actor {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+    opacity: 0.85;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .seg-1 .co-money-actor { display: none; }
+  .seg-4 .co-money-actor { display: none; }
+
+  .co-money-note {
+    margin: 1rem 0 0 0;
+    font-family: var(--sans);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .co-chain {
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow-x: visible;
+    }
+    .co-link-wrap {
+      flex-direction: column;
+      width: 100%;
+    }
+    .co-node {
+      width: 100%;
+      min-width: 0;
+    }
+    .co-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

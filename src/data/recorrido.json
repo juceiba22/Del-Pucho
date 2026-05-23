@@ -1,0 +1,89 @@
+{
+  "comentario": "Las 6 paradas del recorrido del tabaco argentino. Cada una incluye un actor, una transformación física, una valorización económica y un mecanismo de captura. Los valores en USD son referencias del precio final del paquete; el desglose es ilustrativo del orden de magnitud descripto por Ibarra.",
+  "paradas": [
+    {
+      "id": "productor",
+      "numero": "01",
+      "kicker": "Donde empieza la cadena",
+      "titulo": "El productor primario",
+      "actores": "16.000 productores en 7 provincias",
+      "que_pasa": "Siembra, cosecha y entrega la hoja verde. Recibe un precio fijado por la industria y un complemento del FET pagado en dos cuotas semestrales en pesos. La inflación licúa la segunda cuota.",
+      "stats": [
+        { "valor": "USD 1,60", "label": "Precio de acopio por kg (Virginia, prom.)" },
+        { "valor": "USD 0,80", "label": "Plus del FET por kg, en pesos a 6/12 meses" },
+        { "valor": "USD 4.166", "label": "Ingreso anual promedio por productor" }
+      ],
+      "perdida": "El productor entrega la hoja antes de saber el valor final del paquete. Toma precio. No lo pone."
+    },
+    {
+      "id": "curado",
+      "numero": "02",
+      "kicker": "La hoja se vuelve oro",
+      "titulo": "El curado",
+      "actores": "Estufas y galpones del propio productor o de cooperativas",
+      "que_pasa": "La hoja verde se cura —se seca y fermenta con calor controlado—. Pasa de verde a oro o tabaco. Es la última etapa donde el productor todavía controla físicamente el producto. Cuando entrega la hoja curada al acopio, pierde la cadena.",
+      "stats": [
+        { "valor": "4-7 días", "label": "Tiempo de curado en estufa (Virginia)" },
+        { "valor": "5:1", "label": "Relación hoja verde / hoja curada en peso" },
+        { "valor": "100%", "label": "del costo de curado, a cargo del productor" }
+      ],
+      "perdida": "El productor financia el curado con su propia plata. La industria recibe la hoja lista para procesar, sin haber pagado por la transformación."
+    },
+    {
+      "id": "acopio",
+      "numero": "03",
+      "kicker": "Donde se rompe la negociación",
+      "titulo": "El acopio",
+      "actores": "10 acopiadores manejan el 90% del volumen",
+      "que_pasa": "El acopio compra la hoja curada, la clasifica por calidad y la concentra. Como el productor enfrenta pocos compradores y el acopio enfrenta muchos vendedores, el poder de negociación queda desbalanceado por estructura. Las cooperativas, que en teoría existen para corregirlo, son simultáneamente parte del sistema FET.",
+      "stats": [
+        { "valor": "10", "label": "Acopiadores controlan el 90% del volumen nacional" },
+        { "valor": "16.000", "label": "Productores enfrentan a esos 10 acopiadores" },
+        { "valor": "1.600:1", "label": "Asimetría estructural de la negociación" }
+      ],
+      "perdida": "El precio se forma acá, no en una mesa de mercado. Por eso el precio argentino es la mitad del precio brasileño."
+    },
+    {
+      "id": "industria",
+      "numero": "04",
+      "kicker": "Donde la hoja se vuelve marca",
+      "titulo": "La industria",
+      "actores": "Massalin, BAT, Sarandí, Bronway",
+      "que_pasa": "La hoja se procesa, se mezcla con saborizantes y aditivos, se enrolla en cigarrillos y se empaqueta. La industria captura el valor agregado del branding, la distribución y la marca. Aquí el producto deja de ser commodity y se vuelve consumo masivo identitario.",
+      "stats": [
+        { "valor": "50%+", "label": "Cuota de mercado de Massalin (PMI)" },
+        { "valor": "USD 0,40", "label": "Costo industrial estimado por paquete" },
+        { "valor": "10x", "label": "Margen industrial vs precio de acopio al productor" }
+      ],
+      "perdida": "La industria no defiende al productor: lo necesita barato. Cada peso menos que paga es un peso más de margen propio."
+    },
+    {
+      "id": "estado",
+      "numero": "05",
+      "kicker": "El gran recaudador",
+      "titulo": "El Estado",
+      "actores": "AFIP, provincias, organismos del FET",
+      "que_pasa": "El Estado cobra el impuesto interno —que ronda el 60-70% del precio al consumidor— más el IVA. De ese total, una fracción se canaliza al FET y vuelve al productor en dos cuotas licuadas. La caja la maneja el Estado; el productor recibe lo que sobra después de la inflación.",
+      "stats": [
+        { "valor": "80%+", "label": "del precio al consumidor son impuestos" },
+        { "valor": "USD 175-200 M", "label": "Recaudación anual del FET" },
+        { "valor": "35%", "label": "del FET va directo al productor; 65% a las Unidades Ejecutoras" }
+      ],
+      "perdida": "El Estado es el mayor beneficiario fiscal del sector, pero el peor administrador del fondo que dice ser para el productor."
+    },
+    {
+      "id": "kiosco",
+      "numero": "06",
+      "kicker": "Donde termina la cadena",
+      "titulo": "El kiosco",
+      "actores": "El consumidor final paga el paquete",
+      "que_pasa": "Por cada paquete que se vende, el consumidor paga un precio que incluye el costo industrial, la marca, los impuestos y los márgenes de cada eslabón. El productor primario que sembró la hoja seis meses atrás recibirá una fracción mínima de ese precio, y la recibirá tarde, en pesos y devaluada por la inflación.",
+      "stats": [
+        { "valor": "USD 2-3", "label": "Precio promedio del paquete (Marlboro, 2024)" },
+        { "valor": "3,2%", "label": "del precio final llega al productor primario" },
+        { "valor": "96,8%", "label": "se distribuye entre industria, acopio, Estado y comercio" }
+      ],
+      "perdida": "El consumidor cree que paga por un producto. En realidad paga por un sistema. Y el sistema no devuelve al productor que lo originó."
+    }
+  ]
+}
