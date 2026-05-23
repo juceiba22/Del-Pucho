@@ -1,0 +1,18 @@
+{
+  "_metadata": {
+    "fuente": "Estimación ilustrativa basada en Ibarra, 'Del Pucho al Cigarrillo Electrónico' (2026). Los puntos 2017 y 2023 son los citados en el libro; los demás años se interpolan razonablemente para mostrar las tendencias.",
+    "unidad": "Millones de paquetes vendidos por año"
+  },
+  "años": ["2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024"],
+  "series": {
+    "massalin":    [1100, 1080, 1080, 1060, 1050, 1040, 1030, 1020, 1010, 1000,  990,  990,  995, 1000, 1000, 1000, 1050],
+    "bat":         [ 500,  490,  480,  460,  440,  410,  380,  340,  300,  255,  220,  180,  150,  120,   95,   74,   80],
+    "sarandi":     [   0,    5,   15,   30,   50,   80,  120,  160,  200,  257,  280,  295,  305,  315,  325,  338,  320],
+    "bronway":     [   0,    0,    5,   10,   18,   28,   42,   55,   72,   90,  100,  108,  115,  122,  130,  137,  130]
+  },
+  "leyes": [
+    { "año": 2009, "label": "Ley 26.467", "subtitle": "Categoría más vendida" },
+    { "año": 2017, "label": "Ley 27.430", "subtitle": "\"Ley Massalin\"" },
+    { "año": 2024, "label": "Ley Bases",  "subtitle": "Cambio de partitura" }
+  ]
+}

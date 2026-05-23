@@ -1,0 +1,19 @@
+{
+  "comentario": "FET nominal y real, base 100 = 2017. La serie nominal en USD muestra la recaudación parafiscal (175-200 M USD anuales aprox). La serie real (en USD constantes 2017, ajustando por la pérdida de poder adquisitivo doméstico cuando se gira al productor en pesos en dos cuotas semestrales con inflación alta) muestra la licuación efectiva sobre el productor primario.",
+  "años": [2017, 2018, 2019, 2020, 2021, 2022, 2023],
+  "series": {
+    "fet_nominal_musd": [185, 175, 180, 185, 195, 200, 195],
+    "fet_real_base_productor": [185, 162, 148, 135, 118, 99, 84]
+  },
+  "indices": {
+    "comentario_indice": "Mismos datos expresados como índice base 100 = 2017 para evidenciar la divergencia",
+    "fet_nominal_indice": [100, 95, 97, 100, 105, 108, 105],
+    "fet_real_indice": [100, 88, 80, 73, 64, 54, 45]
+  },
+  "totales": {
+    "perdida_real_pct": -55,
+    "ganancia_nominal_pct": 5,
+    "brecha_2023_pct": 50,
+    "monto_recaudado_promedio_musd": 185
+  }
+}
