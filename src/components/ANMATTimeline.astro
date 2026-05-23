@@ -1,0 +1,191 @@
+---
+import data from '../data/lobby.json';
+const items = data.cronologia;
+const anmat = data.anmat;
+
+const tipoLabel: Record<string, string> = {
+  regulacion: 'Regulación',
+  lobby: 'Lobby legislativo',
+  judicial: 'Acción judicial',
+  campana: 'Campaña',
+};
+---
+
+<div class="at-wrap reveal">
+  <div class="at-card">
+    <header class="at-card-header">
+      <div>
+        <span class="at-kicker">Disposición ANMAT {anmat.disposicion}</span>
+        <h4 class="at-card-title">{anmat.objeto}</h4>
+        <p class="at-fundamento"><strong>Fundamento original:</strong> {anmat.fundamento}</p>
+        <p class="at-estado"><strong>Estado actual:</strong> {anmat.estado_actual}</p>
+      </div>
+    </header>
+
+    <ol class="at-timeline">
+      {items.map(it => (
+        <li class={`at-item at-${it.tipo}`}>
+          <div class="at-year">{it.año}</div>
+          <div class="at-dot"></div>
+          <div class="at-body">
+            <span class="at-tipo">{tipoLabel[it.tipo] || it.tipo}</span>
+            <p class="at-event">{it.evento}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <p class="at-footnote">
+      La línea de tiempo muestra que la prohibición —pensada como medida sanitaria— enfrenta presión continua desde 2019 por tres vías paralelas: el Congreso, los tribunales y la opinión pública. El patrón coincide con el de otros mercados donde PMI logró revertir o flexibilizar restricciones equivalentes.
+    </p>
+  </div>
+</div>
+
+<style>
+  .at-wrap {
+    max-width: var(--max-section);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .at-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .at-card-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .at-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .at-card-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 0 0 1rem 0;
+    color: var(--ink-on-paper);
+    letter-spacing: -0.01em;
+  }
+  .at-fundamento,
+  .at-estado {
+    margin: 0 0 0.5rem 0;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .at-fundamento strong,
+  .at-estado strong {
+    font-weight: 600;
+    color: var(--ink-on-paper);
+  }
+
+  .at-timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .at-timeline::before {
+    content: '';
+    position: absolute;
+    left: 78px;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .at-item {
+    display: grid;
+    grid-template-columns: 64px 28px 1fr;
+    gap: 0.5rem;
+    align-items: flex-start;
+    padding: 0.5rem 0 1.5rem;
+    position: relative;
+  }
+  .at-year {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--ink-on-paper);
+    text-align: right;
+    padding-top: 0.05rem;
+    letter-spacing: -0.01em;
+  }
+  .at-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--ember);
+    margin-top: 0.45rem;
+    justify-self: center;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .at-lobby .at-dot { border-color: var(--gold); }
+  .at-judicial .at-dot { border-color: #6b5d4d; }
+  .at-campana .at-dot { border-color: var(--ember); background: var(--ember); }
+
+  .at-body {
+    min-width: 0;
+  }
+  .at-tipo {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--ember);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--ember);
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+  }
+  .at-lobby .at-tipo { color: var(--gold); border-color: var(--gold); }
+  .at-judicial .at-tipo { color: #6b5d4d; border-color: #6b5d4d; }
+  .at-campana .at-tipo { color: var(--ember); border-color: var(--ember); background: rgba(200,57,46,0.06); }
+
+  .at-event {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-on-paper);
+  }
+
+  .at-footnote {
+    margin: 1rem 0 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .at-timeline::before {
+      left: 58px;
+    }
+    .at-item {
+      grid-template-columns: 50px 20px 1fr;
+      gap: 0.4rem;
+    }
+    .at-year { font-size: 0.95rem; }
+    .at-dot { width: 11px; height: 11px; }
+    .at-event { font-size: 0.88rem; }
+  }
+</style>

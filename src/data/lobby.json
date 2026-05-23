@@ -1,0 +1,69 @@
+{
+  "comentario": "Cifras agregadas de PMI globales (reportes anuales 2022-2023), cronología de la Disposición ANMAT 3226/2011 y desglose editorial de los tres canales de captura. Las cifras se pueden refinar con fuentes oficiales en QA.",
+  "pmi": {
+    "ingresos_globales_2023_musd": 35000,
+    "ingresos_no_combustibles_musd": 12300,
+    "porcentaje_no_combustibles": 35,
+    "id_invertido_alternativos_acumulado_musd": 12500,
+    "iqos_usuarios_globales_m": 28.6,
+    "cigarrillos_mundial_share_pct": 28,
+    "comentario_share": "1 de cada 3 cigarrillos vendidos en el mundo (excluyendo China) es de PMI"
+  },
+  "anmat": {
+    "disposicion": "3226/2011",
+    "objeto": "Prohibición de importación, distribución, comercialización y publicidad de cigarrillos electrónicos en Argentina",
+    "fundamento": "Falta de evidencia científica sobre seguridad e inocuidad del producto, principio precautorio en salud pública",
+    "estado_actual": "Vigente, pero con múltiples acciones judiciales en curso y proyectos de ley en el Congreso para revertirla"
+  },
+  "cronologia": [
+    { "año": 2011, "evento": "ANMAT emite Disposición 3226/2011 prohibiendo cigarrillos electrónicos en todo el territorio nacional", "tipo": "regulacion" },
+    { "año": 2015, "evento": "Consulta pública reafirma la prohibición tras revisión técnica", "tipo": "regulacion" },
+    { "año": 2019, "evento": "Primer paquete de proyectos de ley para regular vapeo en lugar de prohibirlo", "tipo": "lobby" },
+    { "año": 2021, "evento": "Cámaras pro-vapeo presentan amparos solicitando habilitar importación personal", "tipo": "judicial" },
+    { "año": 2022, "evento": "PMI lanza campaña global \"smoke-free future\" con foco en mercados latinoamericanos", "tipo": "campana" },
+    { "año": 2023, "evento": "Foundation for a Smoke-Free World deja de recibir fondos de PMI tras presión académica internacional", "tipo": "campana" },
+    { "año": 2024, "evento": "Nuevos proyectos de regulación parcial ingresan al Congreso argentino", "tipo": "lobby" },
+    { "año": 2025, "evento": "Causas judiciales activas en distintos juzgados federales para revertir parcialmente la Disposición", "tipo": "judicial" }
+  ],
+  "canales": [
+    {
+      "id": "campanas",
+      "numero": "01",
+      "titulo": "Campañas comunicacionales",
+      "subtitulo": "Reducción de daño como pieza editorial",
+      "descripcion": "El eje narrativo es la \"harm reduction\": el vapeo presentado como herramienta sanitaria, no como producto de consumo. Periodistas, influencers y plataformas reciben contenido pago bajo formatos que no siempre se declaran como publicidad. La marca corporativa se desplaza al fondo: las campañas las firman fundaciones, asociaciones de consumidores y \"voces científicas\" independientes que muchas veces son contratistas.",
+      "tacticas": [
+        "Contenido editorial pago en medios digitales sin disclosure claro",
+        "Influencers de \"lifestyle\" promocionando dispositivos como objetos de diseño",
+        "Sitios web de \"información científica\" sin afiliación declarada",
+        "Eslogan corporativo \"smoke-free future\" desplaza la discusión del consumo al \"daño relativo\""
+      ]
+    },
+    {
+      "id": "lobby",
+      "numero": "02",
+      "titulo": "Lobby directo y judicial",
+      "subtitulo": "Reescritura del marco normativo por dos vías",
+      "descripcion": "La estrategia opera en simultáneo en el Congreso y en los tribunales. En el Congreso, proyectos de ley que proponen \"regular en lugar de prohibir\" —presentados como modernización sanitaria—. En tribunales, acciones de amparo y nulidad contra la Disposición ANMAT por presunta extralimitación regulatoria, sostenidas por estudios jurídicos especializados y financiadas indirectamente por la industria global del vapeo.",
+      "tacticas": [
+        "Reuniones con legisladores y autoridades sanitarias",
+        "Acciones de amparo y de nulidad contra la Disposición ANMAT 3226/2011",
+        "Asociaciones de consumidores pro-vapeo con financiamiento opaco",
+        "Proyectos de ley redactados con apoyo de consultoras vinculadas a la industria"
+      ]
+    },
+    {
+      "id": "evidencia",
+      "numero": "03",
+      "titulo": "Evidencia científica producida o financiada",
+      "subtitulo": "Investigación a medida y captura académica",
+      "descripcion": "El tercer canal es el más sofisticado: producir o financiar la evidencia que después se cita para justificar el cambio regulatorio. PMI sostuvo durante años a la Foundation for a Smoke-Free World (cortada en 2023 tras presión de la comunidad académica internacional), financia conferencias y eventos sectoriales, y patrocina cátedras en universidades de la región. La cita académica se vuelve, así, una herramienta de lobby.",
+      "tacticas": [
+        "Financiamiento directo de estudios académicos sobre \"harm reduction\"",
+        "Auspicio de eventos y congresos médicos seleccionados",
+        "Cátedras universitarias financiadas indirectamente",
+        "Producción de informes técnicos por consultoras presentados como literatura independiente"
+      ]
+    }
+  ]
+}

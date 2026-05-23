@@ -1,0 +1,158 @@
+---
+import data from '../data/lobby.json';
+const p = data.pmi;
+---
+
+<div class="lk-wrap reveal">
+  <div class="lk-card">
+    <div class="lk-header">
+      <span class="lk-kicker">El actor central</span>
+      <h4 class="lk-title">Philip Morris International en cifras</h4>
+      <p class="lk-sub">El mayor jugador global del tabaco. El que conduce la transición hacia productos "no combustibles". El que también opera en Argentina —vía Massalin Particulares— y el que empuja la apertura del mercado prohibido del vapeo.</p>
+    </div>
+
+    <div class="lk-grid">
+      <div class="lk-stat lk-stat-major">
+        <span class="lk-num">USD {p.ingresos_globales_2023_musd / 1000}.000 M</span>
+        <span class="lk-label">Ingresos globales 2023</span>
+      </div>
+      <div class="lk-stat">
+        <span class="lk-num">{p.porcentaje_no_combustibles}%</span>
+        <span class="lk-label">son productos "no combustibles" (IQOS, vapeo, nicotina oral)</span>
+      </div>
+      <div class="lk-stat">
+        <span class="lk-num">USD {(p.id_invertido_alternativos_acumulado_musd / 1000).toFixed(1)} mil M</span>
+        <span class="lk-label">invertidos en I+D de alternativas desde 2008</span>
+      </div>
+      <div class="lk-stat">
+        <span class="lk-num">{p.iqos_usuarios_globales_m} M</span>
+        <span class="lk-label">usuarios globales de IQOS</span>
+      </div>
+      <div class="lk-stat">
+        <span class="lk-num">1 de cada 3</span>
+        <span class="lk-label">cigarrillos vendidos en el mundo (excl. China)</span>
+      </div>
+    </div>
+
+    <p class="lk-footnote">
+      Cifras tomadas de los reportes anuales de PMI 2022-2023. La compañía explicita en su comunicación corporativa que está en transición hacia un "futuro libre de humo": esa transición es la que en Argentina se traduce en presión regulatoria para revertir la prohibición de la ANMAT.
+    </p>
+  </div>
+</div>
+
+<style>
+  .lk-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .lk-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2.5rem clamp(1.5rem, 4vw, 2.75rem);
+  }
+  .lk-header {
+    margin-bottom: 2rem;
+    max-width: 720px;
+  }
+  .lk-kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ember);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .lk-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 0.85rem 0;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--ink-on-paper);
+  }
+  .lk-sub {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .lk-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+  .lk-stat {
+    padding: 1.25rem 1.25rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+  .lk-stat-major {
+    grid-row: span 2;
+    background: linear-gradient(155deg, rgba(200,57,46,0.06), rgba(184,144,49,0.04));
+    border-color: var(--ember);
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+  .lk-stat-major .lk-num {
+    font-size: 2.6rem;
+    color: var(--ember);
+  }
+  .lk-stat-major .lk-label {
+    font-size: 0.72rem;
+  }
+  .lk-num {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--ink-on-paper);
+    letter-spacing: -0.02em;
+  }
+  .lk-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .lk-footnote {
+    margin: 1.75rem 0 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .lk-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: none;
+    }
+    .lk-stat-major {
+      grid-column: span 2;
+      grid-row: auto;
+    }
+    .lk-stat-major .lk-num { font-size: 2.1rem; }
+  }
+  @media (max-width: 560px) {
+    .lk-grid { grid-template-columns: 1fr; }
+    .lk-stat-major { grid-column: auto; }
+  }
+</style>

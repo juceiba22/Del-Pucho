@@ -1,0 +1,159 @@
+---
+import data from '../data/lobby.json';
+const canales = data.canales;
+---
+
+<div class="tc-wrap reveal">
+  <div class="tc-grid">
+    {canales.map(c => (
+      <article class={`tc-card tc-${c.id}`}>
+        <header class="tc-head">
+          <span class="tc-num">{c.numero}</span>
+          <div class="tc-titles">
+            <h4 class="tc-title">{c.titulo}</h4>
+            <span class="tc-subtitle">{c.subtitulo}</span>
+          </div>
+        </header>
+
+        <p class="tc-desc">{c.descripcion}</p>
+
+        <div class="tc-tacticas">
+          <span class="tc-tac-label">Tácticas observadas</span>
+          <ul class="tc-list">
+            {c.tacticas.map(t => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tc-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+
+  .tc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .tc-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--ember);
+    border-radius: 4px;
+    padding: 1.75rem clamp(1.25rem, 2.5vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: all 0.3s ease;
+  }
+  .tc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(42, 31, 21, 0.08);
+    border-top-color: var(--gold);
+  }
+
+  /* Diferenciación cromática por canal */
+  .tc-campanas { border-top-color: var(--ember); }
+  .tc-lobby { border-top-color: var(--gold); }
+  .tc-evidencia { border-top-color: #6b5d4d; }
+
+  .tc-head {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .tc-num {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 2.4rem;
+    line-height: 0.9;
+    color: var(--ember);
+    flex-shrink: 0;
+    letter-spacing: -0.04em;
+  }
+  .tc-lobby .tc-num { color: var(--gold); }
+  .tc-evidencia .tc-num { color: #6b5d4d; }
+
+  .tc-titles {
+    min-width: 0;
+  }
+  .tc-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin: 0 0 0.35rem 0;
+    color: var(--ink-on-paper);
+    letter-spacing: -0.01em;
+  }
+  .tc-subtitle {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  .tc-desc {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink-on-paper);
+  }
+
+  .tc-tacticas {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .tc-tac-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .tc-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    list-style: none;
+  }
+  .tc-list li {
+    position: relative;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 0.6rem;
+    padding-left: 0.25rem;
+  }
+  .tc-list li::before {
+    content: '→';
+    position: absolute;
+    left: -1.1rem;
+    top: 0;
+    color: var(--ember);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .tc-lobby .tc-list li::before { color: var(--gold); }
+  .tc-evidencia .tc-list li::before { color: #6b5d4d; }
+  .tc-list li:last-child { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .tc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

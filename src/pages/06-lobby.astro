@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PullQuote from '../components/PullQuote.astro';
+import ContextBox from '../components/ContextBox.astro';
+import LobbyKeyData from '../components/LobbyKeyData.astro';
+import ThreeChannelsGrid from '../components/ThreeChannelsGrid.astro';
+import ANMATTimeline from '../components/ANMATTimeline.astro';
+import NextSectionTease from '../components/NextSectionTease.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<Layout
+  title="El nuevo lobby"
+  description="Mientras el sector tradicional se desangra, Philip Morris International empuja la apertura del mercado prohibido del cigarrillo electrónico. Tres canales de captura del Estado."
+>
+  <TopNav
+    prevHref="/05-director"
+    prevLabel="05 El director de orquesta"
+    current="06 El nuevo lobby"
+    nextHref="/07-cierre"
+    nextLabel="07 ¿Conspiración o desidia?"
+  />
+
+  <SectionHeader
+    kicker="Sección 06 · El próximo movimiento"
+    title="El nuevo lobby"
+    emphasis="lobby"
+    lead="Mientras el sector tradicional se desangra, otro juega al lado: el del cigarrillo electrónico. Liderado globalmente por Philip Morris International, empuja en Argentina la apertura de un mercado que ANMAT prohibió en 2011."
+  />
+
+  <article class="prose reveal">
+    <p class="lead-paragraph">
+      Lo que se viene en el sector tabacalero argentino no es la continuación del actual: es su reemplazo. Mientras el productor primario pierde hectáreas y el FET se le licúa en la mano, otro actor está movilizando capital, lobby y estrategia comunicacional para abrir un mercado que hoy está prohibido: el del cigarrillo electrónico. El conductor global de esa apertura es <strong>Philip Morris International (PMI)</strong>, la misma multinacional que en Argentina opera vía Massalin Particulares y que se beneficia, hoy, del esquema FET.
+    </p>
+    <p>
+      El producto cambia, pero el actor es el mismo. Y el modelo regulatorio también: una vez abierto el mercado del vapeo en Argentina, los productores primarios de tabaco no formarán parte de la nueva cadena de valor. <strong>El cigarrillo electrónico es, técnicamente, un producto sin hoja.</strong> Sin productor que sostener, no hay FET que justificar; sin FET, no hay sector tabacalero argentino tal como existió durante cinco décadas.
+    </p>
+  </article>
+
+  <SectionHeader
+    variant="sub"
+    kicker="El jugador global"
+    title="Quién es Philip Morris International."
+    lead="Una multinacional que factura más que el PBI de muchos países y que decidió que su futuro no es el cigarrillo combustible. Esa decisión empresarial se traduce, en cada país, en presión regulatoria."
+  />
+
+  <LobbyKeyData />
+
+  <div class="spacer-md" />
+
+  <PullQuote>
+    El productor primario tabacalero está en crisis. La única industria que crece es la que no necesita productores.
+  </PullQuote>
+
+  <SectionHeader
+    variant="sub"
+    kicker="El marco que se quiere correr"
+    title="ANMAT 3226/2011: una prohibición bajo asedio."
+    lead="La Disposición que prohíbe el cigarrillo electrónico en Argentina lleva catorce años vigente. En los últimos seis, enfrenta una presión sostenida desde tres frentes: lobby legislativo, acciones judiciales y campañas comunicacionales."
+  />
+
+  <ANMATTimeline />
+
+  <div class="spacer-md" />
+
+  <SectionHeader
+    variant="sub"
+    kicker="Tres canales de captura"
+    title="Cómo opera el lobby vapeador en Argentina."
+    lead="No es una sola estrategia. Son tres líneas paralelas que se refuerzan entre sí: contenido editorial pago, lobby directo en el Congreso y los tribunales, y producción de evidencia científica a medida."
+  />
+
+  <ThreeChannelsGrid />
+
+  <div class="spacer-md" />
+
+  <article class="prose reveal">
+    <p>
+      Los tres canales operan en simultáneo y no por casualidad. Una campaña en medios necesita una nota académica que la respalde; un proyecto de ley necesita una sentencia favorable previa; un amparo judicial se sostiene con evidencia "independiente". El conjunto está diseñado para que ningún canal funcione solo, y para que la presión sea acumulativa: cada año que pasa, más actores recogen la narrativa de "harm reduction" y la incorporan como sentido común.
+    </p>
+    <p>
+      La paradoja final es la siguiente: el sector tabacalero argentino —productores, cooperativas, dirigentes provinciales, funcionarios— no enfrenta esta amenaza como conjunto. La enfrenta cada actor por su cuenta, dispersos. Mientras el lobby vapeador se coordina globalmente, <strong>la respuesta local sigue fragmentada y centrada en disputar el FET interno</strong>, no en defender la legitimidad estructural del sector frente al cambio que se viene.
+    </p>
+  </article>
+
+  <ContextBox
+    kicker="El escenario probable"
+    title="Si el vapeo se habilita, la cadena tabacalera argentina pierde su razón de existir."
+  >
+    <p>
+      Un mercado de vapeo regulado en Argentina sería abastecido por dispositivos importados —fabricados por PMI, BAT y compañías chinas—. No requiere acopio nacional, no requiere productor primario, no requiere FET. La industria nacional pasaría a operar como distribuidora de productos extranjeros, sin valor agregado local más allá del retail.
+    </p>
+    <p>
+      <strong>Para los 16.000 productores primarios y las 7 provincias tabacaleras, sería el cierre del modelo</strong>. Para PMI y los actores globales del vapeo, sería la apertura de un mercado de millones de consumidores. La asimetría no es ideológica: es de capacidad de incidencia política.
+    </p>
+  </ContextBox>
+
+  <PullQuote cite="Ibarra, p. 38">
+    El sector que hoy disputa el FET puede no tener mañana un sector que disputar.
+  </PullQuote>
+
+  <NextSectionTease
+    kicker="Continuá · Sección 07"
+    title="¿Conspiración o desidia?"
+    emphasis="o desidia"
+    description="Cierre del libro. La pregunta de fondo que articula todo el recorrido: ¿hay una intención coordinada detrás de este diseño, o es simplemente la deriva de un sistema sin nadie al volante? Y por qué la respuesta importa."
+    href="/07-cierre"
+  />
+
+  <ScrollReveal />
+</Layout>
