@@ -1,0 +1,92 @@
+{
+  "_metadata": {
+    "fuente": "Ibarra, 'Del Pucho al Cigarrillo Electrónico' (2026), capítulos sobre cadena productiva y crisis del sector.",
+    "periodo": "2010-2024 (variaciones); 2024-2025 (campaña vigente)"
+  },
+  "provincias": [
+    {
+      "id": "jujuy",
+      "nombre": "Jujuy",
+      "region": "NOA",
+      "tabaco": "Virginia",
+      "productores": "Alta concentración",
+      "produccion_tn": null,
+      "variacion_produccion": -41.6,
+      "variacion_hectareas": -22.47,
+      "tag": null,
+      "nota": "Lidera la pérdida absoluta de hectáreas. Más de 3.000 hectáreas menos en una década."
+    },
+    {
+      "id": "salta",
+      "nombre": "Salta",
+      "region": "NOA",
+      "tabaco": "Virginia",
+      "productores": "1.871",
+      "produccion_tn": 36000,
+      "variacion_produccion": -32.83,
+      "variacion_hectareas": -17.04,
+      "tag": null,
+      "nota": "Productores grandes, capital intensivo. Empresario más que campesino."
+    },
+    {
+      "id": "tucuman",
+      "nombre": "Tucumán",
+      "region": "NOA",
+      "tabaco": "Virginia + Burley",
+      "productores": null,
+      "produccion_tn": null,
+      "variacion_produccion": 12.1,
+      "variacion_hectareas": 10.04,
+      "tag": "Anomalía",
+      "nota": "Única provincia que crece. El libro lo atribuye a la calidad de sus dirigentes, no a la del tabaco."
+    },
+    {
+      "id": "catamarca",
+      "nombre": "Catamarca",
+      "region": "NOA",
+      "tabaco": "Criollo",
+      "productores": null,
+      "produccion_tn": null,
+      "variacion_produccion": -11.4,
+      "variacion_hectareas": -14.79,
+      "tag": null,
+      "nota": "Producción casi exclusivamente Criollo. Pequeños productores, agricultura familiar."
+    },
+    {
+      "id": "chaco",
+      "nombre": "Chaco",
+      "region": "NEA",
+      "tabaco": "Criollo",
+      "productores": null,
+      "produccion_tn": null,
+      "variacion_produccion": -43.3,
+      "variacion_hectareas": -36.38,
+      "tag": null,
+      "nota": "Mayor caída porcentual de hectáreas del país. Sector en retroceso acelerado."
+    },
+    {
+      "id": "corrientes",
+      "nombre": "Corrientes",
+      "region": "NEA",
+      "tabaco": "Criollo",
+      "productores": null,
+      "produccion_tn": null,
+      "variacion_produccion": -50.9,
+      "variacion_hectareas": -11.93,
+      "tag": null,
+      "nota": "Producción declarada se redujo a la mitad en una década."
+    },
+    {
+      "id": "misiones",
+      "nombre": "Misiones",
+      "region": "NEA",
+      "tabaco": "Burley",
+      "productores": "11.385",
+      "produccion_tn": 39000,
+      "variacion_produccion": -54.9,
+      "variacion_hectareas": -2.42,
+      "tag": "Anomalía",
+      "nota": "Cayó 54,9% entre 2010-2023, pero en la campaña 2024-25 triplicó su producción sin variar hectáreas. El libro lo explica por el contrabando de tabaco brasileño."
+    }
+  ]
+}

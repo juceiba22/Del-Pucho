@@ -1,0 +1,303 @@
+---
+import data from '../data/provincias.json';
+
+const provincias = data.provincias;
+
+// Posiciones en el grid (col-start col-span, row-start row-span)
+// Grid es 8 columnas x 6 filas, posicionando aproximadamente
+// como en el mapa real del norte argentino.
+const positions: Record<string, string> = {
+  jujuy:      'grid-column: 2 / 4; grid-row: 1 / 2;',
+  salta:      'grid-column: 2 / 4; grid-row: 2 / 4;',
+  tucuman:    'grid-column: 2 / 3; grid-row: 4 / 5;',
+  catamarca:  'grid-column: 1 / 3; grid-row: 5 / 7;',
+  chaco:      'grid-column: 4 / 6; grid-row: 2 / 4;',
+  corrientes: 'grid-column: 6 / 8; grid-row: 3 / 5;',
+  misiones:   'grid-column: 7 / 9; grid-row: 1 / 3;',
+};
+
+function formatPct(n: number): string {
+  const s = n.toFixed(1).replace('.', ',');
+  return n > 0 ? `+${s}%` : `${s}%`;
+}
+---
+
+<div class="map-wrap reveal">
+  <div class="map-grid-container">
+
+    {/* Silueta sutil de Argentina al fondo */}
+    <svg class="bg-outline" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* Contorno simplificado del norte argentino */}
+      <path d="M 80,80 L 280,60 L 380,90 L 540,95 L 640,110 L 720,140 L 710,250 L 640,290 L 600,330 L 680,340 L 700,420 L 620,440 L 540,460 L 380,470 L 200,460 L 100,420 L 60,340 L 70,200 Z" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 6"/>
+    </svg>
+
+    <div class="map-grid">
+      {provincias.map(p => (
+        <article class={`p-tile ${p.region.toLowerCase()} ${p.variacion_produccion > 0 ? 'positive' : 'negative'}`} style={positions[p.id]}>
+          <header class="p-head">
+            <span class="p-region">{p.region}</span>
+            <h3 class="p-name">{p.nombre}</h3>
+            <span class="p-tabaco">{p.tabaco}</span>
+            {p.tag && <span class="p-anomaly">⚠ {p.tag}</span>}
+          </header>
+
+          <div class="p-stat">
+            <span class="p-stat-num">{formatPct(p.variacion_produccion)}</span>
+            <span class="p-stat-label">Producción 2010-2024</span>
+          </div>
+
+          <div class="p-details">
+            {p.productores && (
+              <div class="p-detail">
+                <span class="d-label">Productores</span>
+                <span class="d-value">{p.productores}</span>
+              </div>
+            )}
+            {p.produccion_tn && (
+              <div class="p-detail">
+                <span class="d-label">Producción 2024-25</span>
+                <span class="d-value">{p.produccion_tn.toLocaleString('es-AR')} Tn</span>
+              </div>
+            )}
+            <div class="p-detail">
+              <span class="d-label">Hectáreas</span>
+              <span class="d-value">{formatPct(p.variacion_hectareas)}</span>
+            </div>
+          </div>
+
+          {p.nota && <p class="p-note">{p.nota}</p>}
+        </article>
+      ))}
+    </div>
+
+    <div class="map-legend">
+      <span class="leg-item"><span class="leg-swatch noa"></span>NOA · Virginia/Burley</span>
+      <span class="leg-item"><span class="leg-swatch nea"></span>NEA · Burley/Criollo</span>
+      <span class="leg-item"><span class="leg-arrow positive">↑</span>En crecimiento</span>
+      <span class="leg-item"><span class="leg-arrow negative">↓</span>En contracción</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .map-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+
+  .map-grid-container {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1rem, 3vw, 2rem);
+    position: relative;
+  }
+
+  .bg-outline {
+    position: absolute;
+    inset: 1rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    color: var(--rule-strong);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(6, minmax(80px, auto));
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* TILE BASE */
+  .p-tile {
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    padding: 1.25rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: all 0.25s ease;
+    min-width: 0;
+  }
+
+  .p-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(42, 31, 21, 0.08);
+    border-color: var(--ember);
+  }
+
+  /* REGION variants */
+  .p-tile.noa .p-region { color: var(--gold); }
+  .p-tile.nea .p-region { color: var(--ember); }
+
+  /* HEAD */
+  .p-head { min-width: 0; position: relative; }
+
+  .p-region {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .p-name {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0.25rem 0 0.2rem 0;
+    color: var(--ink-on-paper);
+  }
+
+  .p-tabaco {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .p-anomaly {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--ember);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--ember);
+    border-radius: 999px;
+  }
+
+  /* STAT */
+  .p-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .p-stat-num {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.85rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .p-tile.positive .p-stat-num { color: var(--gold); }
+  .p-tile.negative .p-stat-num { color: var(--ember); }
+
+  .p-stat-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* DETAILS */
+  .p-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .p-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+  }
+
+  .d-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .d-value {
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--ink-on-paper);
+    text-align: right;
+  }
+
+  /* NOTE */
+  .p-note {
+    margin: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+
+  /* LEGEND */
+  .map-legend {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    gap: 1.5rem 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .leg-item { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+  .leg-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    border: 1px solid var(--rule-strong);
+  }
+
+  .leg-swatch.noa { background: rgba(184, 144, 49, 0.2); border-color: var(--gold); }
+  .leg-swatch.nea { background: rgba(200, 57, 46, 0.2); border-color: var(--ember); }
+
+  .leg-arrow {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .leg-arrow.positive { color: var(--gold); }
+  .leg-arrow.negative { color: var(--ember); }
+
+  /* MOBILE: el grid se aplana a 2 columnas en orden */
+  @media (max-width: 900px) {
+    .map-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: none;
+    }
+    .map-grid > * {
+      grid-column: auto !important;
+      grid-row: auto !important;
+    }
+    .bg-outline { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .map-grid { grid-template-columns: 1fr; }
+  }
+</style>

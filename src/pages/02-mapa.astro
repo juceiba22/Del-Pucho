@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PullQuote from '../components/PullQuote.astro';
+import ProvinceMap from '../components/ProvinceMap.astro';
+import NextSectionTease from '../components/NextSectionTease.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<Layout
+  title="El mapa del sector"
+  description="Geografía productiva del tabaco argentino. Siete provincias, dos regiones, una dualidad estructural y dos anomalías que delatan al sistema."
+>
+  <TopNav
+    prevHref="/"
+    prevLabel="Volver al inicio"
+    current="02 El mapa del sector"
+    nextHref="/04-fet"
+    nextLabel="04 La máquina del FET"
+  />
+
+  <SectionHeader
+    kicker="Sección 02 · Geografía productiva"
+    title="El mapa del sector"
+    emphasis="del sector"
+    lead="Siete provincias, dos regiones, una dualidad estructural. Y dos anomalías que delatan el sistema."
+  />
+
+  <article class="prose reveal">
+    <p class="lead-paragraph">
+      La geografía tabacalera argentina es dual y desigual. El <strong>Noroeste (NOA)</strong> —Jujuy, Salta, Tucumán, Catamarca— concentra la producción de Virginia con lógica empresarial y capital intensivo. El <strong>Noreste (NEA)</strong> —Misiones, Corrientes, Chaco— produce Burley y Criollo bajo lógica de agricultura familiar y minifundio. Esa dualidad no es una particularidad técnica: define quién recibe qué del FET, quién tiene voz política y quién no.
+    </p>
+    <p>
+      A esa dualidad se le suman dos anomalías que saltan a la vista cuando uno mira los números. <strong>Tucumán crece un 12,1% mientras todo el país cae</strong>; no es por la calidad de su hoja, dice el autor, sino por la de su dirigencia. Y <strong>Misiones mantiene la superficie plantada pero triplica la producción declarada</strong> en la campaña 2024-2025, un salto inexplicable salvo por una vía: el contrabando de tabaco brasileño que ingresa para cobrar FET local. Donde el sistema permite arbitrar, alguien lo arbitra.
+    </p>
+  </article>
+
+  <SectionHeader
+    variant="sub"
+    kicker="Cartografía del sector"
+    title="Las siete provincias tabacaleras."
+    lead="Cada tarjeta está posicionada aproximadamente en su lugar geográfico real. El color del badge marca la región. La variación 2010-2024 está en el centro de cada cuadro."
+  />
+
+  <ProvinceMap />
+
+  <div class="spacer-md" />
+
+  <PullQuote cite="Ibarra, p. 20">
+    Misiones tiene un triste sello distintivo: año a año la producción varía dramáticamente según los "incentivos" que trae el comercio ilegal.
+  </PullQuote>
+
+  <article class="prose reveal">
+    <p>
+      Lo que muestra el mapa es más que una distribución regional. Salta y Jujuy lideran la pérdida absoluta de hectáreas con caídas del 17% y 22% respectivamente —el corazón histórico del Virginia argentino se está achicando—. Chaco perdió más de un tercio de su superficie plantada, la mayor contracción porcentual del país. Sólo Tucumán y Misiones aparecen como excepciones, y las dos por razones distintas que el libro analiza con desconfianza: en un caso, una dirigencia que se mueve mejor que el resto; en el otro, una frontera porosa con Brasil que permite que el contrabando pase como producción local y cobre FET.
+    </p>
+    <p>
+      Mientras tanto, en la suma de todas las provincias, <strong>se perdieron 26.000 hectáreas plantadas a nivel nacional</strong>. Una caída del 31,56% en poco más de diez años. Un dato que debería preocupar enormemente a las provincias tabacaleras —cuanto menos a sus dirigentes—. La pregunta de por qué eso ocurre mientras el precio internacional del tabaco sube se responde en la siguiente sección.
+    </p>
+  </article>
+
+  <NextSectionTease
+    kicker="Continuá · Sección 04"
+    title="La máquina del FET"
+    emphasis="del FET"
+    description="Por qué cae la producción mientras los precios internacionales suben. Cómo un fondo creado para sostener al productor terminó subsidiando al acopio."
+    href="/04-fet"
+  />
+
+  <ScrollReveal />
+</Layout>
