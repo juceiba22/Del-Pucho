@@ -1,0 +1,215 @@
+---
+import data from '../data/provincias.json';
+
+// Ordenamos por variación de hectáreas, de menor (más caída) a mayor (más crecimiento).
+const sorted = [...data.provincias].sort((a, b) => a.variacion_hectareas - b.variacion_hectareas);
+const labels = sorted.map(p => p.nombre);
+const valores = sorted.map(p => p.variacion_hectareas);
+const colors = sorted.map(p => p.variacion_hectareas >= 0 ? '#b89031' : '#c8392e');
+const tabacos = sorted.map(p => p.tabaco);
+---
+
+<div class="pd-wrap reveal">
+  <div class="pd-card">
+    <div class="pd-header">
+      <div>
+        <h4 class="pd-title">Variación de hectáreas plantadas por provincia</h4>
+        <span class="pd-sub">Diferencia % · 2010 vs. 2024</span>
+      </div>
+      <div class="pd-legend">
+        <span class="pd-leg-item"><span class="pd-swatch ember"></span>En contracción</span>
+        <span class="pd-leg-item"><span class="pd-swatch gold"></span>En crecimiento</span>
+      </div>
+    </div>
+
+    <div class="pd-canvas-container">
+      <canvas id="pdChart" aria-label="Variación porcentual de hectáreas plantadas de tabaco por provincia entre 2010 y 2024"></canvas>
+    </div>
+
+    <p class="pd-footnote">
+      Sólo Tucumán y Misiones crecen. La primera, por la efectividad de su dirigencia política; la segunda, por la frontera porosa con Brasil que permite ingresar tabaco y declararlo como producción local para cobrar el FET. Las cinco restantes pierden superficie de forma sostenida.
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ labels, valores, colors, tabacos }}>
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) { existing.addEventListener('load', () => resolve()); if (existing.dataset.loaded) resolve(); return; }
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => { s.dataset.loaded = 'true'; resolve(); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function loadDeps() {
+    if (!window.Chart) {
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js');
+    }
+  }
+
+  function initChart() {
+    const canvas = document.getElementById('pdChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    new window.Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Variación 2010-2024',
+          data: valores,
+          backgroundColor: colors,
+          borderRadius: 3,
+          borderSkipped: false,
+          barPercentage: 0.8,
+          categoryPercentage: 0.7,
+        }],
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1100, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#2a1f15',
+            titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+            bodyFont: { family: 'Inter', size: 13 },
+            padding: 12,
+            cornerRadius: 4,
+            callbacks: {
+              title: (ctx) => ctx[0].label,
+              label: (ctx) => {
+                const v = ctx.parsed.x;
+                const sign = v > 0 ? '+' : '';
+                return [
+                  ` Variación: ${sign}${v.toFixed(1)}%`,
+                  ` Tabaco: ${tabacos[ctx.dataIndex]}`,
+                ];
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(216, 205, 184, 0.5)' },
+            ticks: {
+              font: { family: 'JetBrains Mono', size: 11 },
+              color: '#6b5d4d',
+              callback: (v) => (v > 0 ? '+' : '') + v + '%',
+            },
+            border: { display: false },
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              font: { family: 'Inter', size: 13, weight: '500' },
+              color: '#2a1f15',
+              padding: 8,
+            },
+            border: { color: '#d8cdb8' },
+          },
+        },
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('.pd-wrap');
+    if (!wrap) return;
+    const start = () => loadDeps().then(initChart);
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { start(); obs.disconnect(); }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(wrap);
+  });
+</script>
+
+<style>
+  .pd-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .pd-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .pd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .pd-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+  }
+  .pd-sub {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .pd-legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .pd-leg-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pd-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+  }
+  .pd-swatch.ember { background: #c8392e; }
+  .pd-swatch.gold { background: #b89031; }
+
+  .pd-canvas-container {
+    position: relative;
+    height: 380px;
+  }
+
+  .pd-footnote {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .pd-canvas-container { height: 320px; }
+    .pd-header { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
