@@ -1,0 +1,268 @@
+---
+import data from '../data/fet-licuacion.json';
+---
+
+<div class="fr-wrap reveal">
+  <div class="fr-card">
+    <div class="fr-header">
+      <div>
+        <h4 class="fr-title">FET nominal vs FET real recibido por el productor</h4>
+        <span class="fr-sub">Índice base 100 = 2017 · 2017-2023</span>
+      </div>
+      <div class="fr-headline-stat">
+        <span class="fr-headline-num">-55%</span>
+        <span class="fr-headline-label">poder de compra real</span>
+      </div>
+    </div>
+
+    <div class="fr-canvas-container">
+      <canvas id="frChart" aria-label="Comparación entre el FET nominal y el FET real ajustado por inflación recibido por el productor primario entre 2017 y 2023"></canvas>
+    </div>
+
+    <div class="fr-stats">
+      <div class="fr-stat">
+        <span class="fr-stat-num">USD 185 M</span>
+        <span class="fr-stat-label">recaudación nominal promedio anual</span>
+      </div>
+      <div class="fr-stat">
+        <span class="fr-stat-num">2 cuotas</span>
+        <span class="fr-stat-label">semestrales en pesos</span>
+      </div>
+      <div class="fr-stat">
+        <span class="fr-stat-num">50%</span>
+        <span class="fr-stat-label">brecha nominal vs real en 2023</span>
+      </div>
+    </div>
+
+    <p class="fr-footnote">
+      El FET se recauda en valor presente y se gira al productor en pesos, en dos cuotas semestrales. Cuando la inflación es del 100% anual, la segunda cuota llega con la mitad del poder de compra. Eso no es un problema operativo: es un mecanismo de financiamiento del Estado a costa del productor.
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ chartData: data }}>
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) { existing.addEventListener('load', () => resolve()); if (existing.dataset.loaded) resolve(); return; }
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => { s.dataset.loaded = 'true'; resolve(); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function loadDeps() {
+    if (!window.Chart) {
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js');
+    }
+  }
+
+  function initChart() {
+    const canvas = document.getElementById('frChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    new window.Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: chartData.años,
+        datasets: [
+          {
+            label: 'FET nominal (índice)',
+            data: chartData.indices.fet_nominal_indice,
+            backgroundColor: '#b89031',
+            borderRadius: 2,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65,
+            order: 2,
+          },
+          {
+            label: 'FET real recibido por productor (índice)',
+            data: chartData.indices.fet_real_indice,
+            type: 'line',
+            borderColor: '#c8392e',
+            backgroundColor: 'rgba(200, 57, 46, 0.1)',
+            borderWidth: 3,
+            tension: 0.2,
+            pointRadius: 5,
+            pointBackgroundColor: '#c8392e',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 7,
+            fill: false,
+            order: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1200, easing: 'easeOutQuart' },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              font: { family: 'Inter', size: 12, weight: '500' },
+              color: '#2a1f15',
+              padding: 16,
+              boxWidth: 18,
+              boxHeight: 12,
+            },
+          },
+          tooltip: {
+            backgroundColor: '#2a1f15',
+            titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+            bodyFont: { family: 'Inter', size: 13 },
+            padding: 12,
+            cornerRadius: 4,
+            callbacks: {
+              label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`,
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#6b5d4d', maxRotation: 0 },
+            border: { color: '#d8cdb8' },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(216, 205, 184, 0.5)' },
+            ticks: {
+              font: { family: 'JetBrains Mono', size: 11 },
+              color: '#6b5d4d',
+              callback: (v) => 'Índice ' + v,
+            },
+            border: { display: false },
+            suggestedMax: 120,
+          },
+        },
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('.fr-wrap');
+    if (!wrap) return;
+    const start = () => loadDeps().then(initChart);
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { start(); obs.disconnect(); }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(wrap);
+  });
+</script>
+
+<style>
+  .fr-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+  .fr-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+  .fr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .fr-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+  }
+  .fr-sub {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .fr-headline-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .fr-headline-num {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--ember);
+    letter-spacing: -0.03em;
+  }
+  .fr-headline-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.35rem;
+  }
+  .fr-canvas-container {
+    position: relative;
+    height: 380px;
+  }
+  .fr-stats {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .fr-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .fr-stat-num {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--ink-on-paper);
+    letter-spacing: -0.02em;
+  }
+  .fr-stat:last-child .fr-stat-num { color: var(--ember); }
+  .fr-stat-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .fr-footnote {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .fr-canvas-container { height: 300px; }
+    .fr-stats { grid-template-columns: 1fr; }
+    .fr-headline-num { font-size: 1.9rem; }
+  }
+</style>
