@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PullQuote from '../components/PullQuote.astro';
+import ContextBox from '../components/ContextBox.astro';
+import NationalDeclineChart from '../components/NationalDeclineChart.astro';
+import ProvinceDeclineChart from '../components/ProvinceDeclineChart.astro';
+import FETRealChart from '../components/FETRealChart.astro';
+import NextSectionTease from '../components/NextSectionTease.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<Layout
+  title="La crisis silenciosa"
+  description="Treinta años de caída productiva mientras los precios internacionales suben. La crisis del tabaco argentino no es de mercado: es de diseño institucional."
+>
+  <TopNav
+    prevHref="/02-mapa"
+    prevLabel="02 El mapa del sector"
+    current="03 La crisis silenciosa"
+    nextHref="/04-fet"
+    nextLabel="04 La máquina del FET"
+  />
+
+  <SectionHeader
+    kicker="Sección 03 · Diagnóstico productivo"
+    title="La crisis silenciosa"
+    emphasis="silenciosa"
+    lead="Mientras el precio internacional del tabaco sube, Argentina pierde un tercio de su superficie plantada. Una crisis que no se explica por mercado: se explica por diseño."
+  />
+
+  <article class="prose reveal">
+    <p class="lead-paragraph">
+      Si uno mira sólo las primeras planas, la crisis del sector tabacalero argentino es invisible. No hay protestas en Plaza de Mayo, no hay tractorazos en la 9 de Julio, no hay siquiera una mención sostenida en los medios económicos. Sin embargo, en los últimos catorce años se perdieron <strong>26.000 hectáreas plantadas</strong> a nivel nacional —una caída del 31,56%— mientras el precio internacional del tabaco subió más del 80% en dólares. Algo no cierra.
+    </p>
+    <p>
+      La explicación habitual —la del Estado y la del establishment cooperativo— habla de problemas climáticos, dificultades logísticas y "ajustes propios del sector". El libro de Ibarra propone otra cosa: que la crisis es <strong>el resultado funcional de un diseño institucional</strong> que terminó por desalentar la producción primaria. Tres gráficos alcanzan para mostrarlo.
+    </p>
+  </article>
+
+  <div class="spacer-md" />
+
+  <SectionHeader
+    variant="sub"
+    kicker="Gráfico 1 · Caída nacional"
+    title="Catorce años de pérdida continua."
+    lead="No hay un punto de quiebre. Es una pendiente sostenida campaña tras campaña, sin guerra ni catástrofe que la explique."
+  />
+
+  <NationalDeclineChart />
+
+  <div class="spacer-md" />
+
+  <article class="prose reveal">
+    <p>
+      El gráfico muestra lo que debería ser una alarma estructural: una pendiente descendente continua, sin reversiones significativas, en un contexto internacional alcista. Las dos leyes marcadas —la Ley Massalin de 2017 y la Ley Bases de 2024— acompañan la caída pero no la causan: ya venía en marcha. La verdadera causa hay que buscarla en algo más persistente que cualquier ley individual: en el precio que recibe el productor.
+    </p>
+  </article>
+
+  <PullQuote cite="Ibarra, p. 18">
+    El productor argentino recibe la mitad del precio que recibe el brasileño. Eso no cambia campaña tras campaña. Por eso la superficie cae.
+  </PullQuote>
+
+  <SectionHeader
+    variant="sub"
+    kicker="Gráfico 2 · Provincia por provincia"
+    title="Cinco caen, dos crecen. Pero las dos que crecen son anomalías."
+    lead="La pérdida es generalizada en el NOA y en buena parte del NEA. Las dos provincias que escapan a la regla —Tucumán y Misiones— lo hacen por razones que el libro analiza con desconfianza."
+  />
+
+  <ProvinceDeclineChart />
+
+  <div class="spacer-md" />
+
+  <ContextBox
+    kicker="Las dos anomalías"
+    title="Tucumán y Misiones: las únicas que crecen, y ninguna por razones limpias."
+  >
+    <p>
+      <strong>Tucumán (+8,2%)</strong> es la provincia con mejor lobby político del sector. Su Cámara coopta lugares en COMINTAB, Coordinación Nacional y secretarías nacionales con una efectividad notable. No crece por la calidad de su hoja: crece por la calidad de su representación.
+    </p>
+    <p>
+      <strong>Misiones</strong> es el caso más explícito. Mantiene su superficie plantada pero triplica la producción declarada en una sola campaña (2024-2025). Esa anomalía sólo se explica por una vía: el contrabando de tabaco brasileño que ingresa, se mezcla con producción local y se declara para cobrar FET argentino.
+    </p>
+  </ContextBox>
+
+  <article class="prose reveal">
+    <p>
+      Salta y Jujuy, el corazón histórico del Virginia argentino, pierden 17% y 22% de su superficie respectivamente. Chaco se desploma 34%. Catamarca cae 9%, Corrientes 6%. Si la regla es la pérdida, la excepción no es la salud del sector: es la habilidad de unos pocos para apropiarse de los flujos que el sistema deja sobre la mesa.
+    </p>
+  </article>
+
+  <SectionHeader
+    variant="sub"
+    kicker="Gráfico 3 · La licuación del FET"
+    title="El FET nominal se sostiene. El FET real cae a la mitad."
+    lead="La recaudación parafiscal se mantiene en valores similares en dólares. Lo que cambia es cuánto de ese dinero llega al productor con poder de compra. Y la respuesta es: cada vez menos."
+  />
+
+  <FETRealChart />
+
+  <div class="spacer-md" />
+
+  <article class="prose reveal">
+    <p>
+      El esquema es operativamente simple. El FET se recauda como un porcentaje del precio de venta al consumidor, en valor presente. Pero se gira al productor en pesos, en dos cuotas semestrales. En una economía con inflación anual del 100% o más, la segunda cuota llega con la mitad del poder de compra. <strong>Cada año en que el productor demora en recibir el FET, el productor pierde.</strong> El que gana es el que lo administra mientras tanto.
+    </p>
+    <p>
+      Sumado a esto, la fracción que va a las Unidades Ejecutoras —el 65% del fondo— no enfrenta ese mismo proceso de licuación: se gira en bloque y se aplica en proyectos definidos por las mismas cooperativas que la reciben. Resultado: en el período 2017-2023, mientras el FET nominal en USD se mantuvo relativamente estable, el FET real efectivamente recibido por el productor primario cayó un 55%. La diferencia se la quedó la inflación, y la inflación es funcional a quien tiene el dinero en mano.
+    </p>
+  </article>
+
+  <PullQuote>
+    No es un problema operativo. Es una transferencia silenciosa del productor al sistema que lo administra.
+  </PullQuote>
+
+  <article class="prose reveal">
+    <p>
+      Los tres gráficos juntos cuentan una historia que no se ve en titulares pero sí en hectáreas: la producción cae, las provincias se desangran de manera asimétrica, y el instrumento que debería sostener al productor —el FET— se le licúa en la mano. La crisis del tabaco argentino no es de mercado. Es de diseño. La sección siguiente entra al detalle de cómo opera ese diseño.
+    </p>
+  </article>
+
+  <NextSectionTease
+    kicker="Continuá · Sección 04"
+    title="La máquina del FET"
+    emphasis="del FET"
+    description="Por qué un fondo creado para sostener al productor termina subsidiando al acopio. El recorrido del dinero, paso por paso."
+    href="/04-fet"
+  />
+
+  <ScrollReveal />
+</Layout>
