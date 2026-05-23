@@ -1,0 +1,301 @@
+---
+import data from '../data/market-share.json';
+---
+
+<div class="ms-wrap reveal">
+  <div class="ms-card">
+    <div class="ms-header">
+      <div class="ms-titles">
+        <h4 class="ms-title">Cuota de mercado por jugador</h4>
+        <span class="ms-sub">Millones de paquetes vendidos · 2008-2024</span>
+      </div>
+      <div class="ms-legend-laws">
+        <span class="ms-law-tag">Las 3 leyes marcadas como líneas verticales rojas</span>
+      </div>
+    </div>
+
+    <div class="ms-canvas-container">
+      <canvas id="msChart" aria-label="Evolución de la cuota de mercado de las principales tabacaleras argentinas entre 2008 y 2024"></canvas>
+    </div>
+
+    <p class="ms-footnote">
+      Puntos 2017 y 2023 citados en el libro; los demás años se interpolan razonablemente para mostrar las tendencias. Massalin se mantiene estable, BAT cae sistemáticamente desde 2017, Sarandí y Bronway crecen aceleradamente tras la judicialización de la "Ley Massalin".
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ msData: data }}>
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) { existing.addEventListener('load', () => resolve()); if (existing.dataset.loaded) resolve(); return; }
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => { s.dataset.loaded = 'true'; resolve(); };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function loadDeps() {
+    if (!window.Chart) {
+      await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js');
+    }
+    if (!window['chartjs-plugin-annotation']) {
+      await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js');
+    }
+    if (window['chartjs-plugin-annotation'] && window.Chart && !window.__annotationRegistered) {
+      window.Chart.register(window['chartjs-plugin-annotation']);
+      window.__annotationRegistered = true;
+    }
+  }
+
+  function makeAnnotations() {
+    const ann = {};
+    msData.leyes.forEach((ley, i) => {
+      const key = `line${i}`;
+      ann[key] = {
+        type: 'line',
+        xMin: ley.año,
+        xMax: ley.año,
+        borderColor: '#c8392e',
+        borderWidth: 1.5,
+        borderDash: [4, 4],
+        label: {
+          display: true,
+          content: [ley.label, ley.subtitle],
+          position: 'start',
+          backgroundColor: 'rgba(244, 234, 215, 0.95)',
+          borderColor: '#c8392e',
+          borderWidth: 1,
+          color: '#2a1f15',
+          font: { family: 'JetBrains Mono', size: 10, weight: '600' },
+          padding: { top: 6, bottom: 6, left: 8, right: 8 },
+          borderRadius: 2,
+          xAdjust: 0,
+          yAdjust: 14 + i * 38,
+        },
+      };
+    });
+    return ann;
+  }
+
+  function initChart() {
+    const canvas = document.getElementById('msChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    new window.Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: msData.años,
+        datasets: [
+          {
+            label: 'Massalin Particulares',
+            data: msData.series.massalin,
+            borderColor: '#2a1f15',
+            backgroundColor: 'rgba(42, 31, 21, 0.06)',
+            borderWidth: 2.5,
+            tension: 0.25,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#2a1f15',
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+          },
+          {
+            label: 'BAT (ex Nobleza Picardo)',
+            data: msData.series.bat,
+            borderColor: '#8c7d6c',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#8c7d6c',
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+          },
+          {
+            label: 'Tabacalera Sarandí',
+            data: msData.series.sarandi,
+            borderColor: '#c8392e',
+            backgroundColor: 'transparent',
+            borderWidth: 2.5,
+            tension: 0.25,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#c8392e',
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+          },
+          {
+            label: 'Espert + Bronway',
+            data: msData.series.bronway,
+            borderColor: '#b89031',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.25,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#b89031',
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1400, easing: 'easeOutQuart' },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              font: { family: 'Inter', size: 12, weight: '500' },
+              color: '#2a1f15',
+              padding: 14,
+              boxWidth: 22,
+              boxHeight: 2,
+              usePointStyle: false,
+            },
+          },
+          tooltip: {
+            backgroundColor: '#2a1f15',
+            titleFont: { family: 'JetBrains Mono', size: 11, weight: '600' },
+            bodyFont: { family: 'Inter', size: 13 },
+            padding: 12,
+            cornerRadius: 4,
+            displayColors: true,
+            callbacks: {
+              label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('es-AR')} M paquetes`,
+            },
+          },
+          annotation: {
+            annotations: makeAnnotations(),
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'JetBrains Mono', size: 11 }, color: '#6b5d4d', maxRotation: 0 },
+            border: { color: '#d8cdb8' },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: 'rgba(216, 205, 184, 0.5)' },
+            ticks: {
+              font: { family: 'JetBrains Mono', size: 11 },
+              color: '#6b5d4d',
+              callback: (v) => v + ' M',
+            },
+            border: { display: false },
+            title: {
+              display: true,
+              text: 'Millones de paquetes / año',
+              font: { family: 'Inter', size: 11, weight: '500' },
+              color: '#6b5d4d',
+            },
+          },
+        },
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('.ms-wrap');
+    if (!wrap) return;
+    const start = () => loadDeps().then(initChart);
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          start();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    obs.observe(wrap);
+  });
+</script>
+
+<style>
+  .ms-wrap {
+    max-width: var(--max-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+  }
+
+  .ms-card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .ms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .ms-titles { min-width: 0; }
+
+  .ms-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+  }
+
+  .ms-sub {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .ms-legend-laws {
+    flex-shrink: 0;
+  }
+
+  .ms-law-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ember);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border: 1px dashed var(--ember);
+    border-radius: 999px;
+  }
+
+  .ms-canvas-container {
+    position: relative;
+    height: 500px;
+  }
+
+  .ms-footnote {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .ms-canvas-container { height: 400px; }
+    .ms-header { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
