@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopNav from '../components/TopNav.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import PullQuote from '../components/PullQuote.astro';
+import LawsTimeline from '../components/LawsTimeline.astro';
+import MarketShareChart from '../components/MarketShareChart.astro';
+import NextSectionTease from '../components/NextSectionTease.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<Layout
+  title="El director de orquesta"
+  description="Tres leyes en quince años. Un solo actor en el centro de las tres. La historia regulatoria del tabaco argentino contada como una partitura."
+>
+  <TopNav
+    prevHref="/04-fet"
+    prevLabel="04 La máquina del FET"
+    current="05 El director de orquesta"
+    nextHref="/06-lobby"
+    nextLabel="06 El nuevo lobby"
+  />
+
+  <SectionHeader
+    kicker="Sección 05 · La partitura del poder"
+    title="El director de orquesta"
+    emphasis="de orquesta"
+    lead="En política, como en física, no existen los espacios vacíos. Cada regulación significativa fue impulsada, escrita o tolerada por algún actor con interés concreto. En el tabaco argentino, ese actor tiene nombre."
+  />
+
+  <article class="prose reveal">
+    <p class="lead-paragraph">
+      Durante las últimas tres décadas, <strong>Massalin Particulares</strong> —filial argentina de Philip Morris International— no se limitó a competir: configuró las reglas del juego. Cuando ganaba con el statu quo, lo sostuvo. Cuando vio amenazas, las reguló. Cuando la regulación se le volvió en contra, la reescribió.
+    </p>
+    <p>
+      Tres leyes ilustran este modus operandi. Cada una respondió a un contexto competitivo distinto. En las tres, la herramienta fue la misma: <strong>el impuesto interno</strong>. Y en las tres, el resultado fue funcional —de manera directa o indirecta— a la posición dominante de Massalin.
+    </p>
+  </article>
+
+  <PullQuote>
+    Las reglas cambian porque Massalin las necesita.
+  </PullQuote>
+
+  <SectionHeader
+    variant="sub"
+    kicker="Línea de tiempo · 2009-2024"
+    title="Tres leyes, tres movimientos del director."
+    lead="Cada tarjeta es una ley. Cada ley es un cambio en la estructura del mercado. Los efectos se ven después, en el gráfico de cuota de mercado."
+  />
+
+  <LawsTimeline />
+
+  <div class="spacer-md" />
+
+  <SectionHeader
+    variant="sub"
+    kicker="Efecto medible"
+    title="Qué pasó con el mercado después de cada ley."
+    lead="Las tres líneas verticales rojas son los hitos legislativos. Las cuatro curvas son las cuatro empresas. Las pendientes cuentan la historia."
+  />
+
+  <MarketShareChart />
+
+  <div class="spacer-md" />
+
+  <article class="prose reveal">
+    <p>
+      La pendiente lo dice todo. Antes de 2017, BAT era el segundo jugador con cuota relevante. Después de la judicialización de la "Ley Massalin", BAT se desplomó a un tercio de sus ventas y <strong>Sarandí más Bronway tomaron ese espacio</strong>. Sumadas, las pymes nacionales pasaron a representar cerca del 30% del mercado. Massalin no se movió en términos absolutos —siguió vendiendo cerca de mil millones de paquetes anuales—, pero su cuota relativa se redujo por primera vez en décadas.
+    </p>
+    <p>
+      La Ley Bases de 2024 vino a corregir eso. No reabriendo el segmento premium, sino habilitando a Massalin a <em>competir hacia abajo</em>. Marlboro Craft es la respuesta operativa: una versión económica de Marlboro, con el mismo branding y la mitad del precio. La industria del cigarrillo argentino entró así en una nueva fase: ya no se disputa solamente en el Boletín Oficial; ahora también en la góndola. Pero la disputa comercial sólo fue posible porque el marco regulatorio lo habilitó previamente.
+    </p>
+  </article>
+
+  <PullQuote cite="Ibarra, p. 38">
+    Cambia la partitura, pero no el director.
+  </PullQuote>
+
+  <NextSectionTease
+    kicker="Continuá · Sección 06"
+    title="El nuevo lobby"
+    emphasis="lobby"
+    description="Vapeo, productos sin combustión y el rediseño del negocio. La industria ya no necesita al productor primario; necesita una nueva regulación. Y la está empujando."
+    href="/06-lobby"
+  />
+
+  <ScrollReveal />
+</Layout>
